@@ -1,0 +1,5 @@
+Meeting tracking:
+
+1st meeting - Apr 30th, 2018 from 2:30- 3:30 pm
+	- Discuss breaking workloads into smaller chunks and log them into Trello.
+	- Discuss the standup meeting that we are going to have in a daily bases (10 minutes long)
