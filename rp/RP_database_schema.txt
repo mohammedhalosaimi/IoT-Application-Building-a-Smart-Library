@@ -1,0 +1,14 @@
+"Using sqlite3 to create db"
+ReceptionPi{
+ACCOUNT{
+username TEXT NOT NULL PRIMARY KEY,
+password TEXT
+}
+USER{
+firstname TEXT,
+lastname TEXT,
+email TEXT,
+username TEXT,
+FOREIGN KEY (username) REFERENCES ACCOUNT(username)
+}
+}
