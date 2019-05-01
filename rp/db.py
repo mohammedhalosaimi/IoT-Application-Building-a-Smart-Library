@@ -1,10 +1,14 @@
+# pip3 install passlib
+
+from passlib.hash import sha256_crypt
 from datetime import date
 import sqlite3
 import time
 
-dbname="Recepition_Pi"
+dbname="Recepition_Pi.db"
 
 class database:
+
     @staticmethod
     def connection(): 
         # connect to the database
@@ -16,9 +20,9 @@ class database:
         conn=database.connection()
         with conn:
             cur = conn.cursor()
-            cur.execute("DROP TABLE IF EXITSTS ACCOUNT")
+            cur.execute("DROP TABLE IF EXISTS ACCOUNT")
             cur.execute("CREATE TABLE ACCOUNT(username TEXT NOT NULL PRIMARY KEY,password TEXT)")
-            cur.execute("DROP TABLE IF EXITSTS USER")
+            cur.execute("DROP TABLE IF EXISTS USER")
             cur.execute("CREATE TABLE USER(firstname TEXT,lastname TEXT,email TEXT,username TEXT,FOREIGN KEY (username) REFERENCES ACCOUNT(username))")
             
     @staticmethod
@@ -41,3 +45,16 @@ class database:
             if password != result[-1][-1] :
                 return True
         return False
+
+    @staticmethod
+    def checkusernameexist(username):
+        conn=database.connection()
+        with conn:
+            cur=conn.cursor()
+            result=list(cur.execute("SELECTE * FROM ACCOUNT WHERE USERNAME = ?",(username)))
+            print('aaaassdfsadgadfgdsfhsdhs')
+            print(result)
+            if not result:
+                return True
+            else:
+                return False
