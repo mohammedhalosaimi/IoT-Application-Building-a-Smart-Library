@@ -20,11 +20,11 @@ class database:
             cur.execute("CREATE TABLE ACCOUNT(username TEXT NOT NULL PRIMARY KEY,password TEXT)")
             cur.execute("DROP TABLE IF EXITSTS USER")
             cur.execute("CREATE TABLE USER(firstname TEXT,lastname TEXT,email TEXT,username TEXT,FOREIGN KEY (username) REFERENCES ACCOUNT(username))")
+            
+    @staticmethod
+    def insertData(username,password,firstname,lastname,email):
+        pass
 
-@staticmethod
-def insertData(username,password,firstname,lastname,email):
-    pass
-
-@staticmethod
-def veriftData(username,password):
-    pass
+    @staticmethod
+    def veriftData(username,password):
+        pass
