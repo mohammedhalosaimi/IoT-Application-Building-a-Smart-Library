@@ -1,0 +1,73 @@
+Things to keep in mind that we do while writing codes:
+- Write comments and doctoring  for every method
+- Unit testing
+- Only OOP
+
+
+Research tasks:
+- Google Calendar API
+- unit testing - everyone needs to know
+- sphinx documentation
+- facial recognition  system using opencv
+- Google’s Assistant SDK for voice/search feature to search the textbooks.
+- Google Analytics for generating report in the flask web site
+
+
+
+Splits:
+
+PA --
+
+SPRINT 1 PA part- THIS SPRINT STARTS BY April 30th
+
+
+- RP part excluding facial recognition 
+    - local database - DM & MO tasks
+    - registration and login - DM & MO tasks
+    - socket  - send username and login success message from RP to MP  - Farid
+
+- MP
+    - Construct a cloud database and connection to it - Brad task
+    - Library task:
+        - Search a Book - Farid task
+        - Borrow a book - DM & MO tasks
+        - Return a book - DM & MO tasks
+    - Logout and send logout message from MP to RP  - Farid task
+
+- RP & MP after done coding PA part
+    - Complete documentation using Sphinx, Trello board and Git Hub for this part - Farid task
+
+SPRINT 1 PA part- THIS SPRINT SHOULD BE DONE BY May 7th
+
+
+CR (Flask Web Dashboard)--
+
+SPRINT 1 CR part- THIS SPRINT STARTS Once the cloud database is ready
+
+
+    - All of the admin features available via a web dashboard - Brad task
+    - Create your own RESTful API to talk to the cloud database - Brad task
+    - Add an extra feature where the admin can generate a visual representation of the all book lending and return statistics (daywise and weekwise). - DM & MO tasks
+    - Complete documentation using Sphinx, Trello board and Git Hub for this part - Farid task
+
+
+SPRINT 1 CR part - THIS SPRINT SHOULD BE DONE BY May 12th
+
+
+DI (Facial Recognition Requirement)--
+
+SPRINT 2 DI part- THIS SPRINT STARTS BY May 13th
+
+
+    - facial recognition requirement (must modify [local database to include the image, registration and login class] - MO task
+    - Complete documentation using Sphinx, Trello board and Git Hub for this part - Farid task
+
+
+SPRINT 2 HD part - THIS SPRINT STARTS BY May 13th
+
+- voice/search feature to search the textbooks - DM task
+- object-detection - 
+- complete Sphinx documentation and GitHub
+
+
+SPRINT 2  - THIS SPRINT SHOULD BE DONE BY May 19th
