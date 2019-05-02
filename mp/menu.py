@@ -27,7 +27,7 @@ class Menu:
             elif(selection == "3"):
                 print("Goodbye!")
                 break
-            elif(selection == "4":)
+            elif(selection == "4"):
                 self.searchBookByTitle()
             else:
                 print("Invalid input - please try again.")
