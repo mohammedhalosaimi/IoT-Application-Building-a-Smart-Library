@@ -99,6 +99,7 @@ class cloud_db:
             return cursor.fetchall()
 
     def getBooksByTitle(self,searchTerm):
+        with self.connection.cursor() as cursor:
             cursor.execute("select BookID, Title from Book WHERE Title LIKE '%(searchTerm)%'",{'searchTerm':searchTerm})
             return cursor.fetchall()
 

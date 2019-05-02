@@ -3,6 +3,7 @@ from cloud_db import cloud_db
 class Menu:
     def main(self):
         with cloud_db() as db:
+            #Order we create tables is important
             db.createBookTable()
             db.createLmsUserTable()
             db.createBorrowTable()
