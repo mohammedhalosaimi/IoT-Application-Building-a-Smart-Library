@@ -4,8 +4,9 @@ class Menu:
     def main(self):
         with cloud_db() as db:
             db.createBookTable()
-            db.createBorrowTable()
             db.createLmsUserTable()
+            db.createBorrowTable()
+            
         self.runMenu()
 
     def runMenu(self):
