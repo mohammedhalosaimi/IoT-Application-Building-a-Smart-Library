@@ -17,7 +17,7 @@ import MySQLdb
 class cloud_db:
     
     #Largely based off week 7 code supplied.
-    DATABASE = "TestPeople"
+    DATABASE = "People"
 
     def __init__(self, connection = None):
         dbInfo = cloud_db.load_json()
