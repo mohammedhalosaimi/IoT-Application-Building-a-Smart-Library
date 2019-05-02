@@ -18,10 +18,16 @@ class cloud_db:
 
     def __init__(self, connection = None):
         dbInfo = cloud_db.load_json()
+        print("Loaded in the following information for dbInfo")
+        print(dbInfo["address"])
+        print(dbInfo["username"])
+        print(dbInfo["password"])
+        print(cloud_db.DATABASE)
         if(connection == None):
             connection = MySQLdb.connect(dbInfo["address"], dbInfo["username"],
                 dbInfo["password"], cloud_db.DATABASE)
         self.connection = connection
+        print("Succesfully Connected")
 
     def close(self):
         self.connection.close()
@@ -67,6 +73,8 @@ class cloud_db:
             return json.load(j)
 
 if __name__ == "__main__":
-    db = cloud_db()
-    for person in db.getPeople():
-        print("{:<15} {}".format(person[0], person[1]))
+    print("--- People ---")
+    print("{:<15} {}".format("Person ID", "Name"))
+    with cloud_db() as db:
+        for person in db.getPeople():
+            print("{:<15} {}".format(person[0], person[1]))
