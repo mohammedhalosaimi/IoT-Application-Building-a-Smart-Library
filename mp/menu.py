@@ -9,37 +9,39 @@ class Menu:
     def runMenu(self):
         while(True):
             print()
-            print("1. List People")
-            print("2. Insert Person")
+            print("1. List Books")
+            print("2. Insert Book")
             print("3. Quit")
             selection = input("Select an option: ")
             print()
 
             if(selection == "1"):
-                self.listPeople()
+                self.listBooks()
             elif(selection == "2"):
-                self.insertPerson()
+                self.insertBook()
             elif(selection == "3"):
                 print("Goodbye!")
                 break
             else:
                 print("Invalid input - please try again.")
 
-    def listPeople(self):
-        print("--- People ---")
-        print("{:<15} {}".format("Person ID", "Name"))
+    def listBooks(self):
+        print("--- Books ---")
+        print("{:<15} {}".format("Book ID", "Title"))
         with cloud_db() as db:
-            for person in db.getPeople():
-                print("{:<15} {}".format(person[0], person[1]))
+            for book in db.getBooks():
+                print("{:<15} {}".format(book[0], book[1]))
 
-    def insertPerson(self):
-        print("--- Insert Person ---")
-        name = input("Enter the person's name: ")
+    def insertBook(self):
+        print("--- Insert Book ---")
+        title = input("Enter the title of the new book: ")
+        author = input("Enter the author's name: ")
+        pDate = input("Enter the date of the new book dd/mm/yyyy")
         with cloud_db() as db:
-            if(db.insertPerson(name)):
-                print("{} inserted successfully.".format(name))
+            if(db.insertBook(title, author, pDate)):
+                print("{} inserted successfully.".format(title))
             else:
-                print("{} failed to be inserted.".format(name))
+                print("{} failed to be inserted.".format(title))
 
 if __name__ == "__main__":
     Menu().main()
