@@ -85,7 +85,8 @@ class cloud_db:
     
     def insertBook(self, title, author, pDate):
         with self.connection.cursor() as cursor:
-            cursor.execute("""insert into Book ( 
+            cursor.execute("""insert into Book (
+                Title, Author, PublishedDate) 
                 VALUES(%(title)s, %(author)s, %(pdate)s)""",
                 {'title': title, 'author': author, 'pdate' : pDate})
         self.connection.commit()
