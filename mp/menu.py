@@ -3,7 +3,9 @@ from cloud_db import cloud_db
 class Menu:
     def main(self):
         with cloud_db() as db:
-            db.createPersonTable()
+            db.createBookTable()
+            db.createBorrowTable()
+            db.createLmsUserTable()
         self.runMenu()
 
     def runMenu(self):
