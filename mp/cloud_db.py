@@ -42,19 +42,19 @@ class cloud_db:
                 )""")
         self.connection.commit()
 
-        def insertPerson(self, name):
-            with self.connection.cursor() as cursor:
-                cursor.execute("insert into Person (Name) values (%s)", (name,))
-            self.connection.commit()
-            return cursor.rowcount == 1
+    def insertPerson(self, name):
+        with self.connection.cursor() as cursor:
+            cursor.execute("insert into Person (Name) values (%s)", (name,))
+        self.connection.commit()
+        return cursor.rowcount == 1
 
-        def getPeople(self):
-            with self.connection.cursor() as cursor:
-                cursor.execute("select PersonID, Name from Person")
-            return cursor.fetchall()
+    def getPeople(self):
+        with self.connection.cursor() as cursor:
+            cursor.execute("select PersonID, Name from Person")
+        return cursor.fetchall()
         
-        def deletePerson(self, personID):
-            with self.connection.cursor() as cursor:
+    def deletePerson(self, personID):
+        with self.connection.cursor() as cursor:
                 cursor.execute("delete from Person where PersonID = %s", (personID,))
         self.connection.commit()
 
@@ -67,6 +67,6 @@ class cloud_db:
             return json.load(j)
 
 if __name__ == "__main__":
-    with cloud_db as db:
-            for person in db.getPeople():
-                print("{:<15} {}".format(person[0], person[1]))
+    db = cloud_db()
+    for person in db.getPeople():
+        print("{:<15} {}".format(person[0], person[1]))
