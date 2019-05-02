@@ -98,6 +98,10 @@ class cloud_db:
             cursor.execute("select BookID, Title from Book")
             return cursor.fetchall()
 
+    def getBooksByTitle(self,searchTerm):
+            cursor.execute("select BookID, Title from Book WHERE Title LIKE '%(searchTerm)%'",{'searchTerm':searchTerm})
+            return cursor.fetchall()
+
     def deleteBook(self, bookID):
         return False
     """
