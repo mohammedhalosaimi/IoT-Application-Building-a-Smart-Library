@@ -39,7 +39,7 @@ class Menu:
         print("--- Insert Book ---")
         title = input("Enter the title of the new book: ")
         author = input("Enter the author's name: ")
-        pDate = input("Enter the date of the new book dd/mm/yyyy")
+        pDate = input("Enter the date of the new book y-m-d")
         with cloud_db() as db:
             if(db.insertBook(title, author, pDate)):
                 print("{} inserted successfully.".format(title))
