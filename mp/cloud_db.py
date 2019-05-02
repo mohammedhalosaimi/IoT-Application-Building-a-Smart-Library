@@ -54,7 +54,7 @@ class cloud_db:
     def getPeople(self):
         with self.connection.cursor() as cursor:
             cursor.execute("select PersonID, Name from Person")
-        return cursor.fetchall()
+            return cursor.fetchall()
         
     def deletePerson(self, personID):
         with self.connection.cursor() as cursor:
