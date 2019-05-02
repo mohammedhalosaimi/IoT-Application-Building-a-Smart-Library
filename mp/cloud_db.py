@@ -68,12 +68,3 @@ class cloud_db:
         filename = os.path.join(dir, 'dbInfo.json')
         with open(filename, 'r') as j:
             return json.load(j)
-
-if __name__ == "__main__":
-    print("--- People ---")
-    print("{:<15} {}".format("Person ID", "Name"))
-    with cloud_db() as db:
-        db.createPersonTable()
-        db.insertPerson("Mickey Mouse")
-        for person in db.getPeople():
-            print("{:<15} {}".format(person[0], person[1]))
