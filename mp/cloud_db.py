@@ -1,11 +1,14 @@
 """
 Create a file called dbInfo.json.
-Copy the following code into it and adjust it to suit your DB.
+Follow week 7 tutorials to get your gCloud DB set up.
+Copy the following JSON object into it and adjust it to suit your DB.
 {
     "address": "0.0.0.0",
     "username": "root",
     "password":"your_password"
 }
+
+Don't forget to add your raspberry pi's IP to allowed connections in gCloud.
 """
 import json
 import os
@@ -18,16 +21,10 @@ class cloud_db:
 
     def __init__(self, connection = None):
         dbInfo = cloud_db.load_json()
-        print("Loaded in the following information for dbInfo")
-        print(dbInfo["address"])
-        print(dbInfo["username"])
-        print(dbInfo["password"])
-        print(cloud_db.DATABASE)
         if(connection == None):
             connection = MySQLdb.connect(dbInfo["address"], dbInfo["username"],
                 dbInfo["password"], cloud_db.DATABASE)
         self.connection = connection
-        print("Succesfully Connected")
 
     def close(self):
         self.connection.close()
@@ -76,5 +73,7 @@ if __name__ == "__main__":
     print("--- People ---")
     print("{:<15} {}".format("Person ID", "Name"))
     with cloud_db() as db:
+        db.createPersonTable()
+        db.insertPerson("Mickey Mouse")
         for person in db.getPeople():
             print("{:<15} {}".format(person[0], person[1]))
