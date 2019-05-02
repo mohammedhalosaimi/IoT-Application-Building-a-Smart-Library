@@ -94,7 +94,7 @@ class cloud_db:
     
     def getBooks(self):
         with self.connection.cursor() as cursor:
-            cursor.execute("select BookID, Name from Book")
+            cursor.execute("select BookID, Title from Book")
             return cursor.fetchall()
 
     def deleteBook(self, bookID):
