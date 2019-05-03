@@ -22,7 +22,7 @@ class user:
                     user.register()
                 # if user types 2 -- > call login method
                 elif user_input == 2:
-                    user.login()
+                    return user.login()
                 else:
                 # if user types something else --> prompts them again
                     print('Please type either 1 or 2')
@@ -70,5 +70,6 @@ class user:
             attempt += 1
         if attempt >= 4: exit
         if database.veriftData(username,password)== True:
+            print("loggedin")
             # send login message to Master Pi
-            pass
+            return "loggedin"
