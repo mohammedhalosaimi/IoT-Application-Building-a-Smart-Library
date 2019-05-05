@@ -3,12 +3,9 @@ import logging
 
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class library_menu:
-    # def main(self):
-    #     # with DatabaseUtils() as db:
-    #     #     db.createPersonTable()
-    #     self.runMenu()
     @staticmethod
-    def runMenu(self):
+    def runMenu(self, user):
+        print("Welcome " + user + "!")
         print()
         print("1. Search a book")
         print("2. Borrow a book")
@@ -26,7 +23,7 @@ class library_menu:
                 self.returnBook()
             elif(selection == "4"):
                 print("Goodbye!")
-                return "loggedout"
+                return "logout"
             else:
                 print("Invalid input - please try again.")
         except  Exception as e:
@@ -46,21 +43,3 @@ class library_menu:
     def returnBook(self):
         pass #Add return function here
 
-    # def listPeople(self):
-    #     print("--- People ---")
-    #     print("{:<15} {}".format("Person ID", "Name"))
-    #     with DatabaseUtils() as db:
-    #         for person in db.getPeople():
-    #             print("{:<15} {}".format(person[0], person[1]))
-
-    # def insertPerson(self):
-    #     print("--- Insert Person ---")
-    #     name = input("Enter the person's name: ")
-    #     with DatabaseUtils() as db:
-    #         if(db.insertPerson(name)):
-    #             print("{} inserted successfully.".format(name))
-    #         else:
-    #             print("{} failed to be inserted.".format(name))
-
-# if __name__ == "__main__":
-#     menu().main()

@@ -8,7 +8,11 @@ import logging
 
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class mp_socket:
-
+    # Server connetion is to run a server TCP socket to connect Reciption Pi to Master Pi.
+    # On setting up the connection, server listens to the connection requests and the coming messages.
+    # This message will be the logged in user name which will be used for book borrowing purpose.
+    # When the user selects logout fromthe library menu, the server will send "logout" message to RP
+    # and RP is required to logout the user  
     def connection(self, test = None):
         testPassed = False
         HOST = ""    # Empty string means to listen on all IP's on the machine, also works with IPv6.
@@ -20,12 +24,12 @@ class mp_socket:
                 s.bind(ADDRESS)
                 s.listen()
                 
-                print("Listening on {}...".format(ADDRESS))
+                # Test server connection:
                 if(test == "test_setupServer"):
                     return True
-                conn, addr = s.accept()
+                conn = s.accept()
                 with conn:
-                    print("Connected to {}".format(addr))
+                    # test client connection
                     if(test == "test_ConnectToServer"):
                         testPassed = True
                     else:
@@ -34,16 +38,12 @@ class mp_socket:
                             if(not data):
                                 break
 
-                            print("Received {} bytes of data decoded to: '{}'".format(
-                                len(data), data.decode()))
-                            message = data.decode() #Received message from RP
-                            if(message == "loggedin"): #If user has successfully loggedin
-                                # Call library menu
-                                message  = library_menu.runMenu()
-                                if(message == "loggedout"):
-                                    conn.sendall(message.encode())
-                                else:
-                                    conn.sendall(message.encode()) 
+                            user = data.decode() #Received message from RP
+
+                            # Call library menu
+                            logout_req  = library_menu.runMenu(user)
+                            if(logout_req == "logout"):
+                                conn.sendall(logout_req.encode())
 
                     print("Disconnecting from client.")
                 print("Closing listening socket.")
