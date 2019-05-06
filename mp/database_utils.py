@@ -5,22 +5,19 @@ import logging
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class DatabaseUtils:
 
-    def __init__(self, connection = None):
-        if(connection == None):
-            try:
-                jsonData = self.readConfig()
-                HOST = jsonData["hostname"]
-                USER = jsonData["user"]  
-                PASSWORD = jsonData["password"]  
-                DATABASE = jsonData["database"]
-                print("Connecting to: {}".format(DATABASE))
-                connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-            except  Exception as e:
-                print("DatabaseUtils error: {}".format(str(e)))
-        self.connection = connection
-        print(self.connection)
-        self.createTables()
+    def __init__(self):
+        try:
+            jsonData = self.readConfig()
+            HOST = jsonData["hostname"]
+            USER = jsonData["user"]  
+            PASSWORD = jsonData["password"]  
+            DATABASE = jsonData["database"]  
 
+            self.connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+            print(self.connection)
+            self.createTables()
+        except  Exception as e:
+            print("DatabaseUtils error: {}".format(str(e)))
 
     def close(self):
         self.connection.close()
@@ -39,11 +36,9 @@ class DatabaseUtils:
     # User CRUD table
     # ****************************************
     # Insert user
-    def insertUser(self, userName, name):
+    def insertUser(self, name):
         with self.connection.cursor() as cursor:
-            cursor.execute("""insert into LmsUser 
-                (UserName, Name) values (%(username)s,%(name)s)""",
-                {'username': userName, 'name': name})
+            cursor.execute("insert into LmsUser (UserName) values (%s)", (name,))
         self.connection.commit()
 
         return cursor.rowcount == 1
@@ -80,19 +75,19 @@ class DatabaseUtils:
     # Get Book by title
     def getBookByTitle(self, title):
         with self.connection.cursor() as cursor:
-            cursor.execute("select * from Book Where Title = %s", (title,))
+            cursor.execute("select * from Book Where Title Like %s", ("%" + title + "%",))
             return cursor.fetchall()
 
     # Get Book by Author
     def getBookByAuthor(self, author):
         with self.connection.cursor() as cursor:
-            cursor.execute("select * from Book Where Author = %s", (author,))
+            cursor.execute("select * from Book Where Author Like %s", ("%" + author + "%",))
             return cursor.fetchall()
 
     # Get Book by PublishedDate
     def getBookByPublishedDate(self, publishedDate):
         with self.connection.cursor() as cursor:
-            cursor.execute("select * from Book Where PublishedDate = %s", (publishedDate,))
+            cursor.execute("select * from Book Where PublishedDate Like %s", ("%" + publishedDate + "%",))
             return cursor.fetchall()
 
     # Delete Book
