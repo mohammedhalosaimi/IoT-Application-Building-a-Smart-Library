@@ -5,21 +5,22 @@ import logging
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class DatabaseUtils:
 
-    def __init__(self):
-        try:
-            jsonData = self.readConfig()
-            HOST = jsonData["hostname"]
-            USER = jsonData["user"]  
-            PASSWORD = jsonData["password"]  
-            DATABASE = jsonData["database"]  
+    def __init__(self, connection = None):
+        if(connection == None):
+            try:
+                jsonData = self.readConfig()
+                HOST = jsonData["hostname"]
+                USER = jsonData["user"]  
+                PASSWORD = jsonData["password"]  
+                DATABASE = jsonData["database"]
+                print("Connecting to: {}".format(DATABASE))
+                connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+            except  Exception as e:
+                print("DatabaseUtils error: {}".format(str(e)))
+        self.connection = connection
+        print(self.connection)
+        self.createTables()
 
-            # if(connection == None):
-            #     connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-            self.connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-            print(self.connection)
-            self.createTables()
-        except  Exception as e:
-            print("DatabaseUtils error: {}".format(str(e)))
 
     def close(self):
         self.connection.close()
@@ -38,9 +39,11 @@ class DatabaseUtils:
     # User CRUD table
     # ****************************************
     # Insert user
-    def insertUser(self, name):
+    def insertUser(self, userName, name):
         with self.connection.cursor() as cursor:
-            cursor.execute("insert into LmsUser (UserName) values (%s)", (name,))
+            cursor.execute("""insert into LmsUser 
+                (UserName, Name) values (%(username)s,%(name)s)""",
+                {'username': userName, 'name': name})
         self.connection.commit()
 
         return cursor.rowcount == 1
