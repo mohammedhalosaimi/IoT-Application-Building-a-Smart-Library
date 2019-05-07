@@ -9,6 +9,7 @@ from db import database
 import re 
 from passlib.hash import sha256_crypt
 import getpass
+from rp_socket import rp_socket
 
 # start of class user
 class user:
@@ -128,7 +129,9 @@ class user:
         if database.veriftPassword(username,password)== True:
             # send login message to Master Pi
             print(username, ' welcome to the Smart Library')
-            exit
+            # create an object from rp_socket
+            rp_socket_object = rp_socket()
+            rp_socket_object.connection(username)
         # if login is not successful, then print a message saying login could not be done
         else:
             print('Either username or password is wrong, please re-enter')
