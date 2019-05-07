@@ -23,12 +23,13 @@ class mp_socket:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.bind(ADDRESS)
                 s.listen()
-                
+                print("Listening on {}...".format(ADDRESS))
                 # Test server connection:
                 if(test == "test_setupServer"):
                     return True
-                conn = s.accept()
+                conn, addr = s.accept()
                 with conn:
+                    print("Connected to {}".format(addr))
                     # test client connection
                     if(test == "test_ConnectToServer"):
                         testPassed = True
@@ -37,11 +38,11 @@ class mp_socket:
                             data = conn.recv(4096)
                             if(not data):
                                 break
-
-                            user = data.decode() #Received message from RP
-
-                            # Call library menu
-                            logout_req  = library_menu.runMenu(user)
+                            #Received message from RP   
+                            user = data.decode() 
+                            print("Message from rp: " + user)
+                            # Call library menu to search books/borrow books/return books
+                            logout_req  = library_menu().runMenu(user)
                             if(logout_req == "logout"):
                                 conn.sendall(logout_req.encode())
 
@@ -50,6 +51,7 @@ class mp_socket:
             print("Done.")
         except  Exception as e:
             logging.error("MP Socket error: {}".format(str(e)))
+            print(str(e))
         return testPassed
 
 if __name__ == "__main__":
