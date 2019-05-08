@@ -5,19 +5,22 @@ import logging
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class DatabaseUtils:
 
-    def __init__(self):
-        try:
-            jsonData = self.readConfig()
-            HOST = jsonData["hostname"]
-            USER = jsonData["user"]  
-            PASSWORD = jsonData["password"]  
-            DATABASE = jsonData["database"]  
-
-            self.connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-            print(self.connection)
-            self.createTables()
-        except  Exception as e:
-            print("DatabaseUtils error: {}".format(str(e)))
+    def __init__(self, connection = None):
+        if(connection == None):
+            try:
+                jsonData = self.readConfig()
+                HOST = jsonData["hostname"]
+                USER = jsonData["user"]
+                PASSWORD = jsonData["password"]
+                DATABASE = jsonData["database"]
+                connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+                print("Connecting to: {} with details: {}".format(DATABASE,connection))
+                self.createTables()
+                
+            except Exception as e:
+                print("DatabaseUtils error: {}".format(str(e)))
+            
+        self.connection = connection
 
     def close(self):
         self.connection.close()
@@ -67,7 +70,7 @@ class DatabaseUtils:
     # Insert Book
     def insertBook(self, title, author, publishedDate):
         with self.connection.cursor() as cursor:
-            cursor.execute("insert into Book (Title, Author, PublishedDate) values (%s)", (title,author, publishedDate))
+            cursor.execute("insert into Book (Title, Author, PublishedDate) values (%s, %s, %s)", (title,author, publishedDate))
         self.connection.commit()
 
         return cursor.rowcount == 1
@@ -91,7 +94,7 @@ class DatabaseUtils:
             return cursor.fetchall()
 
     # Delete Book
-    def deletePerson(self, bookID):
+    def deleteBook(self, bookID):
         with self.connection.cursor() as cursor:
             cursor.execute("delete from Book where BookID = %s", (bookID,))
         self.connection.commit()
