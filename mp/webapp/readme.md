@@ -11,7 +11,7 @@ You must have a python3 environment with pip installed.
 * "pip3 install flask-bootstrap"
 
 
-##Running the webapp
+## Running the webapp
 
 To run the webapp:
 
@@ -19,7 +19,7 @@ To run the webapp:
 
 # The API
 
-##Install
+## Install
 
 You must have a python environment with Pip installed.
 Please read the documentation in the API code to configure DB options.
