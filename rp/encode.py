@@ -8,6 +8,11 @@
 ## This code is adapted from:
 ## https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
 
+
+# references:
+# Programming Internet of Things - Lab week 09
+
+
 # import the necessary packages
 from imutils import paths
 import face_recognition
@@ -17,10 +22,16 @@ import cv2
 import os
 
 
+# class encode
 class encode:
 
+	# main method
 	@staticmethod
 	def main():
+
+		"""
+		main method goes to user folder and encodes every picture
+		"""
 
 		# construct the argument parser and parse the arguments
 		ap = argparse.ArgumentParser()

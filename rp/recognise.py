@@ -8,6 +8,10 @@
 ## This code is adapted from:
 ## https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
 
+
+# references:
+# Programming Internet of Things - Lab week 09
+
 # import the necessary packages
 from imutils.video import VideoStream
 import face_recognition
@@ -18,10 +22,18 @@ import time
 import cv2
 
 
+# recognise class
 class recognise:
         
+        # main method
         @staticmethod
         def main():
+
+                """
+                main method: open the video camera and read the face, then encode it and compare it with encoded pictures
+
+                """
+
                 # construct the argument parser and parse the arguments
                 ap = argparse.ArgumentParser()
                 ap.add_argument("-e", "--encodings", default='encodings.pickle',

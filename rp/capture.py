@@ -8,25 +8,28 @@
 ## This code is adapted from:
 ## https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826
 
+
+# references:
+# Programming Internet of Things - Lab week 09
+
 # import the necessary packages
 # import the necessary packages
 import cv2
 import os
 import argparse
 
+# class capture
 class capture:
 
+    # main method
     @staticmethod
     def main(username):
-        # # construct the argument parser and parse the arguments
-        # ap = argparse.ArgumentParser()
-        # ap.add_argument("-n", "--name", required=True,
-        #     help="The name/id of this person you are recording")
-        # ap.add_argument("-i", "--dataset", default='dataset',
-        #     help="path to input directory of faces + images")
-        # args = vars(ap.parse_args())
 
-        print('Inside the main function of capture')
+        """
+        main method, open the camera video and takes multiple pictures of the user face
+
+        parameters: username - which create a folder for each user
+        """
 
         # use name as folder name
         name = username

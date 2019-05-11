@@ -53,9 +53,7 @@ class user:
         """
         registration method does the register a new user into the library system
         """
-
-
-
+        # print a message to the user
         print('Welcome to registration page.\n- Please note that username must contain letters only.\n- Note that your two passwords must match.')
 
         # prompt user for username
@@ -105,17 +103,22 @@ class user:
             # insert the data into the databse calling database class
             database.insertData(username, hashedPassword, first_name, last_name, email)
 
+            # prompt user to choose bwtween console-based/acial recognition authentication
             option = int(input('Please choose:\n- 1 for console-based authentication\n- 2 for facial recognition authentication\n'))
         
+            # if user choses 1, the exit since the user doesn't want to do facial recognition authentication
             if option == 1:
                 exit
 
+            # if user choses facial recognition authentication, then call facial recognition files
             elif option == 2:
                 print('Please be ready as we will take some picture of your face')
                 time.sleep(5)
                 print('Taking pictures now')
+                # capture user face
                 capture.main(username)
                 print('Our system is encoding your pictures for learning purposes.')
+                # encode user face pictures
                 encode.main()
                                     
         # else means that the username already exists in the database
@@ -128,10 +131,14 @@ class user:
     # login method
     @staticmethod
     def login():
+        """
+        Login method, able the user to login in to the library system
+        """
 
-
+        # prompt user to choose bwtween console-based/acial recognition authentication for login option
         option = int(input('Please choose one of the following options to login:\n- 1 for console-based authentication\n- 2 for facial recognition authentication\n'))
         
+        # if user choses 1, it means the user want to login with console-based authentication
         if option == 1:
         
             # prompt user for username
@@ -163,9 +170,11 @@ class user:
                 rp_socket_object = rp_socket()
                 rp_socket_object.connection(username)
 
+        # if user choses 2, it means the user wants to login with facial recognition authentication
         elif option == 2:    
-            # check if username and password are matching for one user
+            # call the recognise file which returns two values, True if face has been recognized, and the user name
             boolean, name = recognise.main()
+            # if the face has been recognized, welcome the user to the smaer library
             if boolean == True:
                 # send login message to Master Pi
                 print(name, ' welcome to the Smart Library')
