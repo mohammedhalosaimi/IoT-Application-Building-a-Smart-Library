@@ -1,5 +1,20 @@
 Meeting tracking:
 
-1st meeting - Apr 30th, 2018 from 2:30- 3:30 pm
+1st meeting - Apr 30th, 2019 from 2:30- 3:30 pm
 	- Discuss breaking workloads into smaller chunks and log them into Trello.
 	- Discuss the standup meeting that we are going to have in a daily bases (10 minutes long)
+
+
+2nd meeting - May 9th, 2019 from 3:30- 4:30 pm
+	SQL changes:
+
+	Schema Add ISBN to the book table.
+	Remove the Published Date.
+	Remove name (not username) from the SQL.
+	Does Admin for Flask web API need Authentication?
+
+	Brad - Have flask done by 11th or ask for help.
+
+	Google Calandar API working
+
+	Farid - Work on getting cloud and calendar integrated.
