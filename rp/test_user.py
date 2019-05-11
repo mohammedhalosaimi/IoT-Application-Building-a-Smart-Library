@@ -2,5 +2,7 @@
 import unittest
 from user import user
 
-class user_test(unittest.TestCase):
-    
+class TestUser(unittest.TestCase):
+
+    def test_menu(self):
+        
