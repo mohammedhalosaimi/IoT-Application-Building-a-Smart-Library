@@ -10,6 +10,10 @@ import re
 from passlib.hash import sha256_crypt
 import getpass
 from rp_socket import rp_socket
+from capture import capture
+from encode import encode
+from recognise import recognise
+import time
 
 # start of class user
 class user:
@@ -49,6 +53,9 @@ class user:
         """
         registration method does the register a new user into the library system
         """
+
+
+
         print('Welcome to registration page.\n- Please note that username must contain letters only.\n- Note that your two passwords must match.')
 
         # prompt user for username
@@ -93,45 +100,80 @@ class user:
             # prompt user for email address
             email = input('Please type your email address ')
             # check if email address does contain the proper format of an email, if not then prompt user for last name again
-            while re.match("\S+@\S+", first_name) == False: email = input('Please type your email address ')
+            while re.match("\S+@\S+", email) == False: email = input('Please type your email address ')
             
             # insert the data into the databse calling database class
             database.insertData(username, hashedPassword, first_name, last_name, email)
+
+            option = int(input('Please choose:\n- 1 for console-based authentication\n- 2 for facial recognition authentication\n'))
+        
+            if option == 1:
+                exit
+
+            elif option == 2:
+                print('Please be ready as we will take some picture of your face')
+                time.sleep(5)
+                print('Taking pictures now')
+                capture.main(username)
+                print('Our system is encoding your pictures for learning purposes.')
+                encode.main()
+                                    
         # else means that the username already exists in the database
         else:
             # print a message
             print("Username already exists!")
+            exit
+    
 
     # login method
     @staticmethod
     def login():
-        # prompt user for username
-        username = input('Please type your username ')
-        # prompt user for password
-        password = getpass.getpass('Please type your password ')
-        # attempt variable to count the number of attempts the user tries to login
-        attempt = 0
-        # check if username and password aren't associated with each other and attempt is less than 4 times
-        while database.veriftPassword(username, password) == False and attempt < 4:
-            # print a meaningful message
-            print('Either username or password is wrong, please re-enter')
+
+
+        option = int(input('Please choose one of the following options to login:\n- 1 for console-based authentication\n- 2 for facial recognition authentication\n'))
+        
+        if option == 1:
+        
             # prompt user for username
             username = input('Please type your username ')
             # prompt user for password
             password = getpass.getpass('Please type your password ')
-            # increment attempt times
-            attempt += 1
-        # if attempts is greater or equal tna 4, then print a message and exit
-        if attempt >= 4:
-            print('You exceeded more than 4 attempts to login. Try and login again')
-            exit
-        # check if username and password are matching for one user
-        if database.veriftPassword(username,password)== True:
-            # send login message to Master Pi
-            print(username, ' welcome to the Smart Library')
-            # create an object from rp_socket
-            rp_socket_object = rp_socket()
-            rp_socket_object.connection(username)
+            # attempt variable to count the number of attempts the user tries to login
+            attempt = 0
+            # check if username and password aren't associated with each other and attempt is less than 4 times
+            while database.veriftPassword(username, password) == False and attempt < 4:
+                # print a meaningful message
+                print('Either username or password is wrong, please re-enter')
+                # prompt user for username
+                username = input('Please type your username ')
+                # prompt user for password
+                password = getpass.getpass('Please type your password ')
+                # increment attempt times
+                attempt += 1
+            # if attempts is greater or equal tna 4, then print a message and exit
+            if attempt >= 4:
+                print('You exceeded more than 4 attempts to login. Try and login again')
+                exit
+                
+            # check if username and password are matching for one user
+            if database.veriftPassword(username,password)== True:
+                # send login message to Master Pi
+                print(username, ' welcome to the Smart Library')
+                # create an object from rp_socket
+                rp_socket_object = rp_socket()
+                rp_socket_object.connection(username)
+
+        elif option == 2:    
+            # check if username and password are matching for one user
+            boolean, name = recognise.main()
+            if boolean == True:
+                # send login message to Master Pi
+                print(name, ' welcome to the Smart Library')
+                # create an object from rp_socket
+                rp_socket_object = rp_socket()
+                rp_socket_object.connection(username)
+            else:
+                print('The System Could Not Recognize your Face')
         # if login is not successful, then print a message saying login could not be done
         else:
             print('Either username or password is wrong, please re-enter')

@@ -7,11 +7,11 @@ import re
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class library_menu:
 
-    def __init__(self):
-        self.insertUser("user_name_1")
+    # def __init__(self):
+        # self.insertUser("user_name_1")
         # self.listUsers()
 
-    @staticmethod
+  
     def runMenu(self, user):
         print("Welcome " + user + "!")
         while True:
@@ -41,7 +41,6 @@ class library_menu:
 
 
     # Search a book
-    @staticmethod
     def searchBook(self):
         while True:
             print()
@@ -69,8 +68,7 @@ class library_menu:
 
         # Borrow a book
     def borrowBook(self):
-        
-        print('Please type the')
+        pass  #Add borrow function here
 
         # Return a book
     def returnBook(self):
@@ -120,7 +118,3 @@ class library_menu:
 
 
 library_menu()
-
-
-
-

@@ -13,6 +13,8 @@ from datetime import timedelta
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
+import time
+from pytz import timezone
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = "https://www.googleapis.com/auth/calendar"
@@ -43,7 +45,7 @@ def main():
         print(start, event["summary"])
 
 def insert(username, isbn,title,author):
-    date = datetime.now()
+    date = datetime.now(timezone('Australia/Melbourne'))
     curr_time=date.time()
     next_week = (date + timedelta(days = 7)).strftime("%Y-%m-%d")
     time_start = "{}T{}".format(next_week,curr_time)
@@ -60,10 +62,7 @@ def insert(username, isbn,title,author):
             "dateTime": time_end,
             "timeZone": "Australia/Melbourne",
         },
-        "attendees": [
-            { "email": "kevin@scare.you" },
-            { "email": "shekhar@wake.you" },
-        ],
+        "id": isbn,
         "reminders": {
             "useDefault": False,
             "overrides": [
@@ -73,11 +72,20 @@ def insert(username, isbn,title,author):
         }
     }
 
-    event = service.events().insert(calendarId = "primary", body = event).execute()
-    print("Event created: {}".format(event.get("htmlLink")))
+    try:
+        event = service.events().insert(calendarId = "primary",  body = event).execute()
+        print("Event created: {}".format(event.get("htmlLink")))
+    except:
+        event = service.events().update(calendarId='primary', eventId=isbn, body=event).execute()
 
+
+def removeEvent(isbn):
+    # this function does not delete the event, rather it hides it and changes the status to 'cancell'
+    service.events().delete(calendarId = "primary", eventId = isbn).execute()
 
 
 if __name__ == "__main__":
     main()
-    insert('Mohammed', '12345', 'Why Me', 'Mohammed Alotaibi')
+    # 12345 --> resolve adding and deleting this isbn
+    insert('Mohammed', '23456', 'Why Me', 'Mohammed Alotaibi')
+    # removeEvent('23456')
