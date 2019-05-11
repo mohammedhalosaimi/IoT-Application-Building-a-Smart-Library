@@ -33,9 +33,9 @@ class library_menu:
                 if(selection == "1"):
                     self.searchBook()
                 elif(selection == "2"):
-                    self.borrowBook()
+                    self.borrowBook(user)
                 elif(selection == "3"):
-                    self.returnBook()
+                    self.returnBook(user)
                 elif(selection == "4"):
                     print("Goodbye!")
                     return "logout"
@@ -88,7 +88,7 @@ class library_menu:
                 logging.error("Search menu error: {}".format(str(e)))
 
         # Borrow a book
-    def borrowBook(self):
+    def borrowBook(self, user):
 
         print('Please Note that you only can borrow a book by its ISBN. If you do not know the ISBN, please go back to the menu and search the book first')
         # prompt the user for book's ISBN
@@ -129,7 +129,7 @@ class library_menu:
                         print(db_object.getAvilableBook(i[0]))
 
         # Return a book
-    def returnBook(self):
+    def returnBook(self, user):
         
         """
         allow the user to return a book
