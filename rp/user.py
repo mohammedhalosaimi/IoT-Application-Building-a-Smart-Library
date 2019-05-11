@@ -59,7 +59,7 @@ class user:
         # prompt user for username
         username = input('Please type your username ')
         # using regular expression, check if the username contains letters only
-        while not re.match("[a-zA-Z]", username): 
+        while not bool(re.match("[a-zA-Z]", username)): 
             # if username doesn't match the specification, then prompt the user again for thier username
             username = input('Please type your username ')
         # check if the username already exists in the database. if username does not exist, then exceed
@@ -90,15 +90,15 @@ class user:
             # prompt user for first name
             first_name = input('Please type your first name ')
             # check if first name contains letters only, if not then prompt user for first name again
-            while re.match("[a-zA-Z]", first_name) == False: first_name = input('Please type your first name ')
+            while bool(re.match("[a-zA-Z]", first_name)) == False: first_name = input('Please type your first name ')
             # prompt user for last name
             last_name = input('Please type your last name ')
             # check if last name contains letters only, if not then prompt user for last name again
-            while re.match("[a-zA-Z]", last_name) == False: last_name = input('Please type your last name ')
+            while bool(re.match("[a-zA-Z]", last_name)) == False: last_name = input('Please type your last name ')
             # prompt user for email address
             email = input('Please type your email address ')
             # check if email address does contain the proper format of an email, if not then prompt user for last name again
-            while re.match("\S+@\S+", email) == False: email = input('Please type your email address ')
+            while bool(re.match("\S+@\S+", email)) == False: email = input('Please type your email address ')
             
             # insert the data into the databse calling database class
             database.insertData(username, hashedPassword, first_name, last_name, email)
