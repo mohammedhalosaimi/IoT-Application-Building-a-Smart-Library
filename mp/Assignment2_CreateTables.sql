@@ -1,16 +1,15 @@
 create table IF NOT EXISTS LmsUser (
 	LmsUserID int not null auto_increment,
     UserName nvarchar(256) not null,
-    Name text not null,
     constraint PK_LmsUser primary key (LmsUserID),
     constraint UN_UserName unique (UserName)
 );
 
 create table IF NOT EXISTS Book (
 	BookID int not null auto_increment,
+    ISBN text not null,
     Title text not null,
     Author text not null,
-    PublishedDate date not null,
     constraint PK_Book primary key (BookID)
 );
 
