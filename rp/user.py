@@ -64,7 +64,7 @@ class user:
             username = input('Please type your username ')
         # check if the username already exists in the database. if username does not exist, then exceed
         # with registration process
-        if database.checkusernameexists(username):
+        if(database.checkusernameexists(username)):
             # prompt user for password
             password = getpass.getpass('Please type your password ')
             # prompt user for password again
@@ -186,3 +186,5 @@ class user:
         # if login is not successful, then print a message saying login could not be done
         else:
             print('Either username or password is wrong, please re-enter')
+
+user.menu()

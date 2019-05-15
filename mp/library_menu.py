@@ -3,6 +3,9 @@ from database_utils import DatabaseUtils
 import logging
 from prettytable import PrettyTable
 import re 
+from bookevent import bookevent
+import datetime
+
 
 logging.basicConfig(filename="library.log", level = logging.ERROR)
 class library_menu:
@@ -30,9 +33,9 @@ class library_menu:
                 if(selection == "1"):
                     self.searchBook()
                 elif(selection == "2"):
-                    self.borrowBook()
+                    self.borrowBook(user)
                 elif(selection == "3"):
-                    self.returnBook()
+                    self.returnBook(user)
                 elif(selection == "4"):
                     print("Goodbye!")
                     return "logout"
@@ -85,13 +88,82 @@ class library_menu:
                 logging.error("Search menu error: {}".format(str(e)))
 
         # Borrow a book
-    def borrowBook(self):
-        pass  #Add borrow function here
+    def borrowBook(self, user):
+
+        print('Please Note that you only can borrow a book by its ISBN. If you do not know the ISBN, please go back to the menu and search the book first')
+        # prompt the user for book's ISBN
+        book_isbn = input('Please type the ISBN here or hit ENTER to go back to menu: \n')
+        
+        # call DatabaseUtils class and create an object of it
+        db_object = DatabaseUtils()
+
+        # get today's date
+        now = datetime.datetime.now()
+        today_date = now.strftime("%Y-%m-%d")
+
+        # check if the user typed the ISBN
+        regex= r'978[\d\-]+\d'
+        pattern = re.match(regex, book_isbn)
+
+        if pattern:
+            # call the getBookByISBN function to check if the book exists at the library
+            book_list = db_object.getBookByISBN(book_isbn)
+            # if the book doesn't exist, the apologize for the user
+            if not book_list:
+                print('We are sorry, we do not have the book at the moment')
+            # if the book exists
+            else:
+                # loop through all the copies of the same book and check which one is avilable to borrow
+                for i in book_list:
+                    # check if the book is avilable to borrow
+                    if i[0] == db_object.getAvilableBook(i[0]):
+                        # get book details from the library
+                        book_details = db_object.getBookByISBN(i[0])
+                        book_details = list(book_details)
+                        # add an event to the calendar with the book details
+                        bookevent.insert(user, i[0], book_details[2], book_details[3])
+                        db_object.insertBookBorrowed(user, i[0], 'borrowed', today_date)
+                        exit
+                    else:
+                        # if the book is not avilable, the print a message to the user
+                        print(db_object.getAvilableBook(i[0]))
 
         # Return a book
-    def returnBook(self):
-        pass #Add return function here
+    def returnBook(self, user):
+        
+        """
+        allow the user to return a book
+        """
 
+        # print a message to the user
+        print('We hope that you enjoyed your journey reading the book')
+        # prompt the user for the book ISBN
+        user_input = input('Please type your book ISBN to continue with return process')
+
+        # call DatabaseUtils class and create an object of it
+        db_object = DatabaseUtils()
+
+        # get today's date
+        now = datetime.datetime.now()
+        today_date = now.strftime("%Y-%m-%d")
+
+        # check if the user typed the ISBN
+        regex= r'978[\d\-]+\d'
+        pattern = re.match(regex, user_input)
+
+        if pattern:
+            # check if the book has been borrowed at the first place
+            if user_input == db_object.checkIfBookExistsInBookBorrowed(user_input, user):
+                # remove the event from Google Calendar
+                 bookevent.removeEvent(user_input)
+                #  update the status of the book in BookBorrowed table
+                 db_object.updateBookBorrowed(user, user_input, 'returned', today_date)
+            # if the book doesn't exist in the BookBorrowed table, then it means the book has not been borrowed
+            else:
+                print('We apologize, the ISBN you entered has not been borrowed by you!')
+        # if the user typed something else rather than book ISBN
+        else:
+            print('Your Input does not match books ISBN')
 
     # list books by title
     def listBooksByTitle(self, title):
@@ -106,7 +178,7 @@ class library_menu:
         table = PrettyTable(['Title', 'Author', 'ISBN'])
         with DatabaseUtils() as db:
             books =  db.getBookByTitle(title)
-            if(books.count > 0):
+            if(len(books) > 0):
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
@@ -126,7 +198,7 @@ class library_menu:
         table = PrettyTable(['Title', 'Author', 'ISBN'])
         with DatabaseUtils() as db:
             books = db.getBookByAuthor(author)
-            if(books.count > 0):
+            if(len(books) > 0):
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
@@ -146,8 +218,8 @@ class library_menu:
         print("--- Books ---")
         table = PrettyTable(['Title', 'Author', 'ISBN'])
         with DatabaseUtils() as db:
-            books = db.getBookBySIBN(isbn)
-            if(books.count > 0):
+            books = db.getBookByISBN(isbn)
+            if(len(books) > 0):
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)

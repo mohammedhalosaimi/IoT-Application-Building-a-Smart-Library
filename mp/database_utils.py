@@ -94,7 +94,7 @@ class DatabaseUtils:
             return cursor.fetchall()
 
     # Delete User
-    def deleteUser(self, lmsUserID):
+    def deleteUser(self, name):
         """
         Delete a user from the cloud 
         Parameters:
@@ -103,7 +103,7 @@ class DatabaseUtils:
 
         """
         with self.connection.cursor() as cursor:
-            cursor.execute("delete from LmsUser where LmsUserID = %s", (lmsUserID,))
+            cursor.execute("delete from LmsUser where UserName = %s", (name,))
         self.connection.commit()
 
 
@@ -195,7 +195,7 @@ class DatabaseUtils:
     # BookBorrowed CRUD table
     # ****************************************
     # Insert BookBorrowed record
-    def insertBookBorrowed(self, lmsUserID, bookID, status, borrowdDate):
+    def insertBookBorrowed(self, name, bookID, status, borrowdDate):
         """
         Allocate a book to a user who borrowed the book, mark the book as borrowed and insert the borrowed date 
         Parameters:
@@ -204,14 +204,14 @@ class DatabaseUtils:
 
         """
         with self.connection.cursor() as cursor:
-            cursor.execute("insert into BookBorrowed (LmsUserID, BookID, Status, BorrowedDate) values (%s, %s, %s, %s)", (lmsUserID,bookID, status, borrowdDate))
+            cursor.execute("insert into BookBorrowed (UserName, BookID, Status, BorrowedDate) values (%s, %s, %s, %s)", (name,bookID, status, borrowdDate))
         self.connection.commit()
 
         return cursor.rowcount == 1
 
 
     # Insert BookBorrowed record
-    def updateBookBorrowed(self, lmsUserID, bookID, status, ReturnedDate):
+    def updateBookBorrowed(self, name, bookID, status, ReturnedDate):
         """
         Update a book which the user returns to the library, change the status to returned and insert the return date 
         Parameters:
@@ -220,13 +220,13 @@ class DatabaseUtils:
 
         """
         with self.connection.cursor() as cursor:
-            cursor.execute("UPDATE BookBorrowed SET Status = %s , ReturnedDate = %s WHERE LmsUserID = %s AND BookID = %s", (status, ReturnedDate, lmsUserID,bookID))
+            cursor.execute("UPDATE BookBorrowed SET Status = %s , ReturnedDate = %s WHERE UserName = %s AND BookID = %s", (status, ReturnedDate, name,bookID))
         self.connection.commit()
 
         return cursor.rowcount == 1
 
     # Get user
-    def getBookBorrowed(self, lmsUserID, bookID):
+    def getBookBorrowed(self, name, bookID):
         """
         Get the user's borrowed book status 
         Parameters:
@@ -235,8 +235,40 @@ class DatabaseUtils:
             user's borrowed book record 
         """
         with self.connection.cursor() as cursor:
-            cursor.execute("select * from BookBorrowed Where LmsUserID = "+ lmsUserID +" AND BookID = "+ bookID)
+            cursor.execute("select * from BookBorrowed Where UserName = "+ name +" AND BookID = "+ bookID)
             return cursor.fetchall()
+
+    # The 2 methods below are new 
+
+    def getAvilableBook(self, bookID):
+        """
+        This method checks if the book that is associated with the bookID is avilable to borrow or not
+
+        Parameters:
+            BookID
+        Returns:
+            Either the avilable bookID or a message stating that the book is not avilable to borrow
+        """
+        
+        with self.connection.cursor() as cursor:
+            cursor.execute("select * from BookBorrowed Where BookID = "+ bookID)
+            book_list = list(cursor.fetchall())
+
+            if not book_list or book_list[3] == 'returned':
+                return bookID
+            else:
+                return 'Book has been borrowed, please check back!'
+
+
+    def checkIfBookExistsInBookBorrowed(self, bookID, name):
+        with self.connection.cursor() as cursor:
+            cursor.execute("select * from BookBorrowed Where BookID = "+ bookID + " and UserName == " + name)
+            book_list = list(cursor.fetchall())
+
+            if book_list[3] == 'borrowed':
+                return bookID 
+            else:
+                exit
 
     # Delete User
     def deleteBookBorrowed(self, bookBorrowedID):
