@@ -5,6 +5,7 @@ from prettytable import PrettyTable
 import re 
 from bookevent import bookevent
 import datetime
+import barcodescanner from barcodescanner
 
 
 logging.basicConfig(filename="library.log", level = logging.ERROR)
@@ -138,7 +139,13 @@ class library_menu:
         # print a message to the user
         print('We hope that you enjoyed your journey reading the book')
         # prompt the user for the book ISBN
-        user_input = input('Please type your book ISBN to continue with return process')
+        option=int(input('Please choose\n 1.Manually Enter the detail\n 2.Return the book using QR code '))
+        if option==1 :
+            user_input = input('Please type your book ISBN to continue with return process')
+        elif option==2:
+            input_isbn=barcodescanner.scanQR()
+            if input_isbn=="quitbyuser":
+                exit
 
         # call DatabaseUtils class and create an object of it
         db_object = DatabaseUtils()
@@ -146,7 +153,6 @@ class library_menu:
         # get today's date
         now = datetime.datetime.now()
         today_date = now.strftime("%Y-%m-%d")
-
         # check if the user typed the ISBN
         regex= r'978[\d\-]+\d'
         pattern = re.match(regex, user_input)
@@ -155,13 +161,13 @@ class library_menu:
             # check if the book has been borrowed at the first place
             if user_input == db_object.checkIfBookExistsInBookBorrowed(user_input, user):
                 # remove the event from Google Calendar
-                 bookevent.removeEvent(user_input)
+                bookevent.removeEvent(user_input)
                 #  update the status of the book in BookBorrowed table
-                 db_object.updateBookBorrowed(user, user_input, 'returned', today_date)
+                db_object.updateBookBorrowed(user, user_input, 'returned', today_date)
             # if the book doesn't exist in the BookBorrowed table, then it means the book has not been borrowed
             else:
                 print('We apologize, the ISBN you entered has not been borrowed by you!')
-        # if the user typed something else rather than book ISBN
+            # if the user typed something else rather than book ISBN
         else:
             print('Your Input does not match books ISBN')
 
@@ -178,7 +184,7 @@ class library_menu:
         table = PrettyTable(['Title', 'Author', 'ISBN'])
         with DatabaseUtils() as db:
             books =  db.getBookByTitle(title)
-            if(books.count > 0):
+            if books.count > 0:
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
@@ -198,7 +204,7 @@ class library_menu:
         table = PrettyTable(['Title', 'Author', 'ISBN'])
         with DatabaseUtils() as db:
             books = db.getBookByAuthor(author)
-            if(books.count > 0):
+            if books.count > 0:
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
@@ -219,7 +225,7 @@ class library_menu:
         table = PrettyTable(['Title', 'Author', 'ISBN'])
         with DatabaseUtils() as db:
             books = db.getBookBySIBN(isbn)
-            if(books.count > 0):
+            if books.count > 0:
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
@@ -238,7 +244,7 @@ class library_menu:
 
     def insertUser(self, name):
         with DatabaseUtils() as db:
-            if(db.insertUser(name)):
+            if db.insertUser(name):
                 print("{} inserted successfully.".format(name))
             else:
                 print("{} failed to be inserted.".format(name))
