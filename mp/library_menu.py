@@ -158,7 +158,7 @@ class library_menu:
                         print(db_object.getAvilableBook(i[0]))
 
         # Return a book
-    def returnBook(self, user):
+def returnBook(self, user):
         
         """
         allow the user to return a book
@@ -167,7 +167,13 @@ class library_menu:
         # print a message to the user
         print('We hope that you enjoyed your journey reading the book')
         # prompt the user for the book ISBN
-        user_input = input('Please type your book ISBN to continue with return process')
+        option=int(input('Please choose\n 1.Manually Enter the detail\n 2.Return the book using QR code '))
+        if option==1 :
+            user_input = input('Please type your book ISBN to continue with return process')
+        elif option==2:
+            input_isbn=barcodescanner.scanQR()
+            if input_isbn=="quitbyuser":
+                exit
 
         # call DatabaseUtils class and create an object of it
         db_object = DatabaseUtils()
@@ -175,7 +181,6 @@ class library_menu:
         # get today's date
         now = datetime.datetime.now()
         today_date = now.strftime("%Y-%m-%d")
-
         # check if the user typed the ISBN
         regex= r'978[\d\-]+\d'
         pattern = re.match(regex, user_input)
@@ -184,13 +189,13 @@ class library_menu:
             # check if the book has been borrowed at the first place
             if user_input == db_object.checkIfBookExistsInBookBorrowed(user_input, user):
                 # remove the event from Google Calendar
-                 bookevent.removeEvent(user_input)
+                bookevent.removeEvent(user_input)
                 #  update the status of the book in BookBorrowed table
-                 db_object.updateBookBorrowed(user, user_input, 'returned', today_date)
+                db_object.updateBookBorrowed(user, user_input, 'returned', today_date)
             # if the book doesn't exist in the BookBorrowed table, then it means the book has not been borrowed
             else:
                 print('We apologize, the ISBN you entered has not been borrowed by you!')
-        # if the user typed something else rather than book ISBN
+            # if the user typed something else rather than book ISBN
         else:
             print('Your Input does not match books ISBN')
 

@@ -60,9 +60,9 @@ class mp_socket:
         except  Exception as e:
             logging.error("MP Socket error: {}".format(str(e)))
             print(str(e))
-        finally:
+        #finally:
             # Clean up the connection
-            conn.close()
+         #   conn.close()
         return testPassed
 
 if __name__ == "__main__":

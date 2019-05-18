@@ -180,11 +180,10 @@ class user:
                 print(name, ' welcome to the Smart Library')
                 # create an object from rp_socket
                 rp_socket_object = rp_socket()
-                rp_socket_object.connection(username)
+                rp_socket_object.connection(name)
             else:
                 print('The System Could Not Recognize your Face')
         # if login is not successful, then print a message saying login could not be done
         else:
             print('Either username or password is wrong, please re-enter')
-
 user.menu()

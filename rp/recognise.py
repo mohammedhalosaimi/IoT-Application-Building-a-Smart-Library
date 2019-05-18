@@ -99,14 +99,19 @@ class recognise:
                                         for i in matchedIdxs:
                                                 name = data["names"][i]
                                                 counts[name] = counts.get(name, 0) + 1
-
                                         # determine the recognized face with the largest number
                                         # of votes (note: in the event of an unlikely tie Python
                                         # will select first entry in the dictionary)
                                         name = max(counts, key=counts.get)
-
+                                
                                 # update the list of names
                                 names.append(name)
+                                if("Unknown" in names):
+                                        return False
+                        if not encodings or boxes:
+                                cv2.destroyAllWindows()
+                                vs.stop() 
+                                return False                   
 
                         # loop over the recognized faces
                         for ((top, right, bottom, left), name) in zip(boxes, names):
@@ -124,13 +129,13 @@ class recognise:
                                 #	0.75, (0, 255, 0), 2)
                                 
                                 # print to console, identified person
-                                print('Person found: {}'.format(name)) 
+                                print('Person found: {}'.format(name))
+                                # do a bit of cleanup
+                                cv2.destroyAllWindows()
+                                vs.stop() 
                                 # Set a flag to sleep the cam for fixed time
                                 time.sleep(3.0)
-
-                                
                                 return True, name
-
 
 
                         # if the video writer is None *AND* we are supposed to write

@@ -38,7 +38,3 @@ class rp_socket:
         with open('config.json') as jsonFile:  
             data = json.load(jsonFile)
         return data
-
-
-if __name__ == "__main__":
-    rp_socket().connection()
