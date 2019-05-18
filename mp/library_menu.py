@@ -4,6 +4,7 @@ import logging
 from prettytable import PrettyTable
 import re 
 from bookevent import bookevent
+from voice_recognition import voice_recognition
 import datetime
 
 
@@ -71,16 +72,44 @@ class library_menu:
 
             try:
                 if(selection == "1"):
-                    title = input("Enter book's title: ")
+                    title = self.SearchByVoiceOrText("title")
                     self.listBooksByTitle(title)
                 elif(selection == "2"):
-                    author = input("Enter book's author: ")
+                    author = self.SearchByVoiceOrText("author")
                     self.listBooksByAuthor(author)
                 elif(selection == "3"):
-                    isbn = input("Enter book's ISBN: ")
-                    # while re.match(r"[\d]{4}-[\d]{1,2}-[\d]{1,2}", publishedDate) == False: publishedDate = input("Enter book's published date (YYYY-MM-DD): ")
+                    isbn = self.SearchByVoiceOrText("ISBN")
                     self.listBooksByISBN(isbn)
                 elif(selection == "4"):
+                    break
+                else:
+                    print("Invalid input - please try again.")
+            except  Exception as e:
+                logging.error("Search menu error: {}".format(str(e)))
+
+    def SearchByVoiceOrText(self, subject):
+        """
+        We can search a book by typing on the command line or talking to google voice recognition.
+
+        Parameters:
+
+        Returns:
+
+        """
+        while True:
+            print()
+            print("1. Search through command line")
+            print("2. Search through voice")
+            print("3. back")
+            selection = input("Select an option: ")
+            print()
+
+            try:
+                if(selection == "1"):
+                    return input("Enter book's "+subject+": ")
+                elif(selection == "2"):
+                    return voice_recognition.getTextFromVoice()
+                elif(selection == "3"):
                     break
                 else:
                     print("Invalid input - please try again.")
