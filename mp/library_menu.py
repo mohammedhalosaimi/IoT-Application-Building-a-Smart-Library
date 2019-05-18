@@ -6,6 +6,7 @@ import re
 from bookevent import bookevent
 from voice_recognition import voice_recognition
 import datetime
+from barcodescanner import barcodescanner
 
 
 logging.basicConfig(filename="library.log", level = logging.ERROR)
@@ -134,7 +135,7 @@ class library_menu:
         regex= r'978[\d\-]+\d'
         pattern = re.match(regex, book_isbn)
 
-        if pattern:
+        if bool(pattern)==True:
             # call the getBookByISBN function to check if the book exists at the library
             book_list = db_object.getBookByISBN(book_isbn)
             # if the book doesn't exist, the apologize for the user
@@ -152,14 +153,15 @@ class library_menu:
                         # add an event to the calendar with the book details
                         bookevent.insert(user, i[0], book_details[2], book_details[3])
                         db_object.insertBookBorrowed(user, i[0], 'borrowed', today_date)
+                        print("You have successfully borrow the "+book_details[2])
                         exit
                     else:
                         # if the book is not avilable, the print a message to the user
                         print(db_object.getAvilableBook(i[0]))
-
+        else:
+            print("Your Input does not match book's ISBN")
         # Return a book
-def returnBook(self, user):
-        
+    def returnBook(self, user):        
         """
         allow the user to return a book
         """
@@ -185,7 +187,7 @@ def returnBook(self, user):
         regex= r'978[\d\-]+\d'
         pattern = re.match(regex, user_input)
 
-        if pattern:
+        if bool(pattern)==True:
             # check if the book has been borrowed at the first place
             if user_input == db_object.checkIfBookExistsInBookBorrowed(user_input, user):
                 # remove the event from Google Calendar
