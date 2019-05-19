@@ -19,7 +19,7 @@ class barcodescanner:
         # loop over the frames from the video stream
         while True:
             user_input=input("Please go to this website https://www.qr-code-generator.com/ to generate QR code with TEXT format.\nHit Enter to continue or q to quit")
-            if(user_inpu=='q'):
+            if(user_input=='q'):
                 return "quitbyuser"
             print("Put QR Code in front of the camera")
             vs = VideoStream(src = 0).start()
@@ -39,6 +39,7 @@ class barcodescanner:
                 regex= r'978[\d\-]+\d'
                 pattern = re.match(regex, barcodeData)
                 if bool(pattern)==True:
+                    vs.stop()
                     return barcodeData
                 print("QR does not follow the format.\nMake sure the format is 978-0-00-000000-0")
             # wait a little before scanning again

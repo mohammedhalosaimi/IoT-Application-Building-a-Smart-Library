@@ -138,6 +138,8 @@ class library_menu:
         if bool(pattern)==True:
             # call the getBookByISBN function to check if the book exists at the library
             book_list = db_object.getBookByISBN(book_isbn)
+            # convert to list
+            book_list = list(book_list)
             # if the book doesn't exist, the apologize for the user
             if not book_list:
                 print('We are sorry, we do not have the book at the moment')
@@ -146,18 +148,20 @@ class library_menu:
                 # loop through all the copies of the same book and check which one is avilable to borrow
                 for i in book_list:
                     # check if the book is avilable to borrow
-                    if i[0] == db_object.getAvilableBook(i[0]):
+                    return_value = db_object.getAvilableBook(i[0])
+                    if return_value == True:
                         # get book details from the library
-                        book_details = db_object.getBookByISBN(i[0])
+                        book_details = db_object.getBookByID(i[0])
                         book_details = list(book_details)
                         # add an event to the calendar with the book details
-                        bookevent.insert(user, i[0], book_details[2], book_details[3])
-                        db_object.insertBookBorrowed(user, i[0], 'borrowed', today_date)
-                        print("You have successfully borrow the "+book_details[2])
+                        id_event = '00000' + str(book_details[0][0])
+                        bookevent.insert(user, id_event, book_details[0][2], book_details[0][3])
+                        db_object.insertBookBorrowed(user, book_details[0][0], 'borrowed', today_date)
+                        print("You have successfully borrowed the " + book_details[0][2])
                         exit
                     else:
                         # if the book is not avilable, the print a message to the user
-                        print(db_object.getAvilableBook(i[0]))
+                        print('Sorry but the book is not avilable')
         else:
             print("Your Input does not match book's ISBN")
         # Return a book
@@ -166,15 +170,14 @@ class library_menu:
         allow the user to return a book
         """
 
-        # print a message to the user
-        print('We hope that you enjoyed your journey reading the book')
         # prompt the user for the book ISBN
-        option=int(input('Please choose\n 1.Manually Enter the detail\n 2.Return the book using QR code '))
+        option=int(input('Please choose\n 1.Manually Enter the detail\n 2.Return the book using QR code \n'))
         if option==1 :
-            user_input = input('Please type your book ISBN to continue with return process')
+            user_input = input('Please type your book ISBN to continue with return process\n')
         elif option==2:
-            input_isbn=barcodescanner.scanQR()
-            if input_isbn=="quitbyuser":
+            user_input = barcodescanner.scanQR()
+            user_input = user_input.strip()
+            if user_input == "quitbyuser":
                 exit
 
         # call DatabaseUtils class and create an object of it
@@ -189,11 +192,15 @@ class library_menu:
 
         if bool(pattern)==True:
             # check if the book has been borrowed at the first place
-            if user_input == db_object.checkIfBookExistsInBookBorrowed(user_input, user):
+            return_value, t_value = db_object.checkIfBookExistsInBookBorrowed(user_input, user)
+            if isinstance(return_value, int) and t_value == True:
+                id_event = '00000' + str(return_value)
                 # remove the event from Google Calendar
-                bookevent.removeEvent(user_input)
+                bookevent.removeEvent(id_event)
                 #  update the status of the book in BookBorrowed table
-                db_object.updateBookBorrowed(user, user_input, 'returned', today_date)
+                db_object.updateBookBorrowed(user, return_value, 'returned', today_date)
+                # print a message to the user
+                print('We hope that you enjoyed your journey reading the book')
             # if the book doesn't exist in the BookBorrowed table, then it means the book has not been borrowed
             else:
                 print('We apologize, the ISBN you entered has not been borrowed by you!')
@@ -297,8 +304,7 @@ class library_menu:
                 print("{} failed to be inserted.".format(title))
         self.listBooks()
 
-
-# library_menu().insertBook("THE SUBTLE ART OF NOT GIVING A FUCK","MARK MANSON","9781925483598")
+# library_menu().insertBook("What the fuck","MARK MANSON","978-1-34-123123-1")
 # library_menu().listBooks()
 
 
