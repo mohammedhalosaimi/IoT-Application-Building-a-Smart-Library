@@ -16,6 +16,7 @@ Meeting tracking:
 	Brad - Have flask done by 11th or ask for help.
 
 	Google Calandar API working
+<<<<<<< HEAD
 
 	Farid - Work on getting cloud and calendar integrated.
 
@@ -27,3 +28,15 @@ Meeting tracking:
 	- Farid started working on the voice recognition part
 	- We will have final meeting once all parts are done
 	- Mohammed and Dawei needs to fix camera issue in the recognize file
+=======
+
+	Farid - Work on getting cloud and calendar integrated.
+	
+
+3rd meeting - May 18th, 2019 from 3 - 4:30 pm
+
+	- Brad is alomost done with flask.
+	- Brad will deal with amintration users and sessions
+	- Testing the integrated version of users and library menu
+	- Farid is testing his code for 
+>>>>>>> 8be056b6252dc5210b824b8b69fc6dfa90fb7308
