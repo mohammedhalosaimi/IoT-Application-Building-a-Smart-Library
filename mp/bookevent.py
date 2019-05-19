@@ -19,7 +19,7 @@ from pytz import timezone
 class bookevent:
 
     @staticmethod
-    def insert(username, isbn,title,author):
+    def insert(username, id,title,author):
     
         # If modifying these scopes, delete the file token.json.
         SCOPES = "https://www.googleapis.com/auth/calendar"
@@ -37,7 +37,7 @@ class bookevent:
         event = {
             "summary": "Return Book",
             "location": "IoT Smart Library",
-            "description": "Username: {} has borrowed book details ISBN: {}  Title: {}  Author: {} ".format(username, isbn,title,author),
+            "description": "Username: {} has borrowed book details Book ID: {}  Title: {}  Author: {} ".format(username, id,title,author),
             "start": {
                 "dateTime": time_start,
                 "timeZone": "Australia/Melbourne",
@@ -46,7 +46,7 @@ class bookevent:
                 "dateTime": time_end,
                 "timeZone": "Australia/Melbourne",
             },
-            "id": isbn,
+            "id": id,
             "reminders": {
                 "useDefault": False,
                 "overrides": [
@@ -60,10 +60,10 @@ class bookevent:
             event = service.events().insert(calendarId = "primary",  body = event).execute()
             print("Event created: {}".format(event.get("htmlLink")))
         except:
-            event = service.events().update(calendarId='primary', eventId=isbn, body=event).execute()
+            event = service.events().update(calendarId='primary', eventId=id, body=event).execute()
 
     @staticmethod
-    def removeEvent(isbn):
+    def removeEvent(id):
         SCOPES = "https://www.googleapis.com/auth/calendar"
         store = file.Storage("token.json")
         creds = store.get()
@@ -72,8 +72,8 @@ class bookevent:
             creds = tools.run_flow(flow, store)
         service = build("calendar", "v3", http=creds.authorize(Http()))
         # this function does not delete the event, rather it hides it and changes the status to 'cancell'
-        service.events().delete(calendarId = "primary", eventId = isbn).execute()
+        service.events().delete(calendarId = "primary", eventId = id).execute()
 
 # 12345 --> resolve adding and deleting this isbn
-bookevent.insert('Mohammed', '23456', 'Why Me', 'Mohammed Alotaibi')
-# removeEvent('23456')
+# bookevent.insert('LLLLL', '23456', 'Why Me', 'LLLLLL')
+# bookevent.removeEvent('23456')

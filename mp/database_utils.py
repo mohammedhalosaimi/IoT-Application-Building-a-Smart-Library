@@ -24,7 +24,7 @@ class DatabaseUtils:
             DATABASE = jsonData["database"]  
 
             self.connection = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-            print(self.connection)
+            # print(self.connection)
             self.createTables()
         except  Exception as e:
             print("DatabaseUtils error: {}".format(str(e)))
@@ -164,6 +164,20 @@ class DatabaseUtils:
             cursor.execute("select * from Book Where ISBN Like %s", ("%" + isbn + "%",))
             return cursor.fetchall()
 
+    # Get Book by book ID
+    def getBookByID(self, bookID):
+        """
+        Fetch all the books containing the keyword in the bookID
+        Parameters:
+            isbn of the book or part of the isbn
+        Returns:
+            All books contating the keyword
+        """
+
+        with self.connection.cursor() as cursor:
+            cursor.execute("select * from Book Where BookID Like %(BookID)s", {"BookID":bookID})
+            return cursor.fetchall()
+
         # Get Book by ISBN
     def getBooks(self):
         """
@@ -249,26 +263,23 @@ class DatabaseUtils:
         Returns:
             Either the avilable bookID or a message stating that the book is not avilable to borrow
         """
-        
+
         with self.connection.cursor() as cursor:
-            cursor.execute("select * from BookBorrowed Where BookID = "+ bookID)
-            book_list = list(cursor.fetchall())
-
-            if not book_list or book_list[3] == 'returned':
-                return bookID
+            cursor.execute("select BookID from BookBorrowed Where BookID = %(BookID)s AND Status = %(Status)s", {'BookID':bookID,"Status":'borrowed'})
+            # return print('cursor.fetchall() RESULT: ', list(cursor.fetchone()))
+            if cursor.rowcount > 0:
+                return False
             else:
-                return 'Book has been borrowed, please check back!'
+                return True
 
 
-    def checkIfBookExistsInBookBorrowed(self, bookID, name):
+    def checkIfBookExistsInBookBorrowed(self, isbn, name):
         with self.connection.cursor() as cursor:
-            cursor.execute("select * from BookBorrowed Where BookID = "+ bookID + " and UserName == " + name)
-            book_list = list(cursor.fetchall())
-
-            if book_list[3] == 'borrowed':
-                return bookID 
+            cursor.execute("select BookBorrowed.BookID from Book, BookBorrowed Where Book.ISBN = %(isbn)s AND Book.BookID = BookBorrowed.BookID AND BookBorrowed.Status = 'borrowed' AND BookBorrowed.UserName = %(name)s",{"isbn":isbn,"name":name})
+            if cursor.rowcount > 0:
+                return list(cursor.fetchall())[0][0], True
             else:
-                exit
+                return None, False
 
     # Delete User
     def deleteBookBorrowed(self, bookBorrowedID):
