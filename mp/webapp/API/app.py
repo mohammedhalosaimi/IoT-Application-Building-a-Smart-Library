@@ -11,6 +11,7 @@ app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Update HOST and PASSWORD appropriately.
+#TODO: Make this load of the confi.json
 HOST = "35.201.19.68"
 USER = "root"
 PASSWORD = "klLBK8BxKmNOfhkE"
