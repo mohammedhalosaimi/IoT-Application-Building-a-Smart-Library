@@ -48,7 +48,7 @@ class mp_socket:
                             if(data):
                                 #Received message from RP   
                                 user = data.decode() 
-                                print("Message from rp: " + user)
+                                # print("Message from rp: " + user)
                                 # Call library menu to search books/borrow books/return books
                                 logout_req  = library_menu().runMenu(user)
                                 if(logout_req == "logout"):

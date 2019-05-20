@@ -103,12 +103,21 @@ class database:
             # move the cursor to the top
             cur = conn.cursor()
             # assign the output of the sql code to a result variable after converting the sql object into a python list
-            result = list(cur.execute("SELECT * FROM account WHERE USERNAME = ?",(username,)))
+            result = list(cur.execute("SELECT password FROM account WHERE USERNAME = ?",(username,)))
             # check if the passed password equals the password that is associated with the username in account table
-            if password != result[-1][-1] :
+            if(sha256_crypt.verify(password, result[0][0])):
                 return True
-            # else return False
-            else: return False
+            else:
+                return False
+                
+
+            # if password == result[0][0]:
+            #     print('True')
+            #     return True
+            # # else return False
+            # else: 
+            #     print('False')
+            #     return False
 
     # check username exists method
     @staticmethod
@@ -129,14 +138,12 @@ class database:
         # call the connection method which returns the connection object
         try:
             conn=database.connection()
-            print(conn)
             with conn:
                 # move the cursor to the top 
                 cur=conn.cursor()
                 # assign the output of the sql code to a result variable after converting the sql object into a python list
                 result = list(cur.execute("SELECT * FROM account WHERE USERNAME = ?",(username,)))
                 # if result is empty which means username does not exist, then return true
-                print(result)
                 if not result:
                     return True
                 # if result is empty which means username does exists in the account table, then return false
@@ -144,6 +151,3 @@ class database:
                     return False
         except  Exception as e:
             print("Error: " + str(e))
-
-
-# database.checkusernameexists('')

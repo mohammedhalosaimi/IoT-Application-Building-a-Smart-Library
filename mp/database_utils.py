@@ -78,7 +78,10 @@ class DatabaseUtils:
         """
         with self.connection.cursor() as cursor:
             cursor.execute("select * from LmsUser Where UserName = %s", (name,))
-            return cursor.fetchall()
+            if cursor.rowcount > 0:
+                return True
+            else:
+                return False
 
     # Get user
     def getUsers(self):
@@ -219,9 +222,11 @@ class DatabaseUtils:
         """
         with self.connection.cursor() as cursor:
             cursor.execute("insert into BookBorrowed (UserName, BookID, Status, BorrowedDate) values (%s, %s, %s, %s)", (name,bookID, status, borrowdDate))
+            # cursor.execute("insert into BookBorrowed (UserName, BookID, Status, BorrowedDate) values (%(UserName)s, %(BookID)s, %(Status)s, %(BorrowedDate)s)", {'UserName':name,"BookID":'bookID', 'Status':status, 'BorrowedDate':borrowdDate})
+            # cursor.execute("insert into BookBorrowed Where BookID = %(BookID)s AND Status = %(Status)s", {'BookID':bookID,"Status":'borrowed'})
         self.connection.commit()
 
-        return cursor.rowcount == 1
+        # return cursor.rowcount == 1
 
 
     # Insert BookBorrowed record
@@ -266,7 +271,6 @@ class DatabaseUtils:
 
         with self.connection.cursor() as cursor:
             cursor.execute("select BookID from BookBorrowed Where BookID = %(BookID)s AND Status = %(Status)s", {'BookID':bookID,"Status":'borrowed'})
-            # return print('cursor.fetchall() RESULT: ', list(cursor.fetchone()))
             if cursor.rowcount > 0:
                 return False
             else:
@@ -274,6 +278,14 @@ class DatabaseUtils:
 
 
     def checkIfBookExistsInBookBorrowed(self, isbn, name):
+        """
+        Check if the book has been borrowed by a user
+
+        Paramters: book ISBN, username
+
+        Returns: book ID and True if the user has borrowed the book. None and False if the user did not borrow the book
+        """
+        
         with self.connection.cursor() as cursor:
             cursor.execute("select BookBorrowed.BookID from Book, BookBorrowed Where Book.ISBN = %(isbn)s AND Book.BookID = BookBorrowed.BookID AND BookBorrowed.Status = 'borrowed' AND BookBorrowed.UserName = %(name)s",{"isbn":isbn,"name":name})
             if cursor.rowcount > 0:

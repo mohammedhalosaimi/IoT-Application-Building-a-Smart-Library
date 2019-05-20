@@ -20,6 +20,8 @@ import imutils
 import pickle
 import time
 import cv2
+import time
+
 
 
 # recognise class
@@ -106,13 +108,9 @@ class recognise:
                                 
                                 # update the list of names
                                 names.append(name)
-                                if("Unknown" in names):
-                                        return False
-                        if not encodings or boxes:
-                                cv2.destroyAllWindows()
-                                vs.stop() 
-                                return False                   
+                                
 
+                  
                         # loop over the recognized faces
                         for ((top, right, bottom, left), name) in zip(boxes, names):
                                 # rescale the face coordinates
@@ -129,14 +127,25 @@ class recognise:
                                 #	0.75, (0, 255, 0), 2)
                                 
                                 # print to console, identified person
-                                print('Person found: {}'.format(name))
+                                # print('Person found: {}'.format(name))
                                 # do a bit of cleanup
                                 cv2.destroyAllWindows()
                                 vs.stop() 
-                                # Set a flag to sleep the cam for fixed time
-                                time.sleep(3.0)
+                                
+                                # return username and True
                                 return True, name
+                                
+                                # Set a flag to sleep the cam for fixed time
+                                # time.sleep(3.0)
+                                
 
+                        # prompt the user if they want to exit
+                        user_input = input('Please type q to exit the facial recognition system  ')
+                        if user_input == 'q':
+                                return False, 'None'
+
+                        # sleep for 5 seconds
+                        time.sleep(5)   
 
                         # if the video writer is None *AND* we are supposed to write
                         # the output video to disk initialize the writer
@@ -155,9 +164,9 @@ class recognise:
                                 cv2.imshow("Frame", frame)
                                 key = cv2.waitKey(1) & 0xFF
 
-                        # if the `q` key was pressed, break from the loop
-                        if key == ord("q"):
-                                break
+                                # if the `q` key was pressed, break from the loop
+                                if key == ord("q"):
+                                        break
 
                 # do a bit of cleanup
                 cv2.destroyAllWindows()
@@ -166,4 +175,6 @@ class recognise:
                 # check to see if the video writer point needs to be released
                 if writer is not None:
                         writer.release()
+                
+                return True, name
 

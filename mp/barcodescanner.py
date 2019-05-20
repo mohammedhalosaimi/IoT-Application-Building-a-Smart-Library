@@ -2,6 +2,8 @@
 ## https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/
 ## pip3 install pyzbar
 
+# Reference: COSC2674 - Programming Internet of Things - lab 10
+
 # import the necessary packages
 from imutils.video import VideoStream
 from pyzbar import pyzbar
@@ -14,6 +16,13 @@ import re
 class barcodescanner:
     @staticmethod
     def scanQR():
+
+        """
+        Scan a QR code and convert it to a string
+
+        Returns: QR code string
+        """
+
         # initialize the video stream and allow the camera sensor to warm up
         #https://www.qr-code-generator.com/
         # loop over the frames from the video stream
@@ -40,7 +49,10 @@ class barcodescanner:
                 pattern = re.match(regex, barcodeData)
                 if bool(pattern)==True:
                     vs.stop()
-                    return barcodeData
-                print("QR does not follow the format.\nMake sure the format is 978-0-00-000000-0")
+                    return barcodeData   
+                else:
+                    print("QR does not follow the format.\nMake sure the format is 978-0-00-000000-0")
+                vs.stop()
             # wait a little before scanning again
             time.sleep(1)
+            vs.stop()

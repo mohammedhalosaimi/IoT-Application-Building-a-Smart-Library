@@ -104,7 +104,7 @@ class user:
             database.insertData(username, hashedPassword, first_name, last_name, email)
 
             # prompt user to choose bwtween console-based/acial recognition authentication
-            option = int(input('Please choose:\n- 1 for console-based authentication\n- 2 for facial recognition authentication\n'))
+            option = int(input('Please choose one of the following options for your login process:\n- 1 for console-based authentication\n- 2 for facial recognition authentication\n'))
         
             # if user choses 1, the exit since the user doesn't want to do facial recognition authentication
             if option == 1:
@@ -145,25 +145,31 @@ class user:
             username = input('Please type your username ')
             # prompt user for password
             password = getpass.getpass('Please type your password ')
+            # hash the password
+            # hashedPassword = sha256_crypt.hash(password)
             # attempt variable to count the number of attempts the user tries to login
             attempt = 0
             # check if username and password aren't associated with each other and attempt is less than 4 times
-            while database.veriftPassword(username, password) == False and attempt < 4:
+            checkPass = database.veriftPassword(username, password)
+            while checkPass == False and attempt < 4:
                 # print a meaningful message
                 print('Either username or password is wrong, please re-enter')
                 # prompt user for username
                 username = input('Please type your username ')
                 # prompt user for password
                 password = getpass.getpass('Please type your password ')
+                # hash the password
+                # hashedPassword = sha256_crypt.hash(password)
                 # increment attempt times
                 attempt += 1
+                checkPass = database.veriftPassword(username, password)
             # if attempts is greater or equal tna 4, then print a message and exit
             if attempt >= 4:
                 print('You exceeded more than 4 attempts to login. Try and login again')
                 exit
                 
             # check if username and password are matching for one user
-            if database.veriftPassword(username,password)== True:
+            if checkPass == True:
                 # send login message to Master Pi
                 print(username, ' welcome to the Smart Library')
                 # create an object from rp_socket
@@ -186,4 +192,6 @@ class user:
         # if login is not successful, then print a message saying login could not be done
         else:
             print('Either username or password is wrong, please re-enter')
+
+# call the user menu
 user.menu()
