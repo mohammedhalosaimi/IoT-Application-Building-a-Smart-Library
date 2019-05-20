@@ -1,24 +1,8 @@
-{% extends 'bootstrap/base.html' %}
-{% block styles %}
-{{super()}}
-<link rel="stylesheet"
-      href="{{url_for('.static', filename='flatly.css')}}">
-{% endblock %}
+{% extends 'template.html' %}
 
-{% block title %}Programming IoT TuteLab 06 - Part 1{% endblock %}
 
 {% block navbar %}
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">Library Admin System</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="/booklist">List all books</a></li>
-    </ul>
-  </div>
-</nav>
+{{super()}}
 {% endblock %}
 
 {% block content %}
