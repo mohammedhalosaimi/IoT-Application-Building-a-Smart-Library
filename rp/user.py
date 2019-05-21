@@ -146,7 +146,8 @@ class user:
             # prompt user for password
             password = getpass.getpass('Please type your password ')
             # hash the password
-            # hashedPassword = sha256_crypt.hash(password)
+            if database.checkusernameexists(username) == True:
+                print('Either username or password is wrong, please re-enter')
             # attempt variable to count the number of attempts the user tries to login
             attempt = 0
             # check if username and password aren't associated with each other and attempt is less than 4 times
@@ -176,6 +177,8 @@ class user:
                 rp_socket_object = rp_socket()
                 rp_socket_object.connection(username)
 
+            
+                
         # if user choses 2, it means the user wants to login with facial recognition authentication
         elif option == 2:    
             # call the recognise file which returns two values, True if face has been recognized, and the user name
@@ -191,7 +194,8 @@ class user:
                 print('The System Could Not Recognize your Face')
         # if login is not successful, then print a message saying login could not be done
         else:
-            print('Either username or password is wrong, please re-enter')
+            print('Please type either 1 or 2')
+            
 
 # call the user menu
 user.menu()

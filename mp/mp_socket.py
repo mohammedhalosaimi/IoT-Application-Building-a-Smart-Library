@@ -36,7 +36,7 @@ class mp_socket:
                 if(test == "test_setupServer"):
                     return True
                 while True:
-                    print("Waiting for Reception Pi...")
+                    print("The Smart Library is Ready be Accessed! Waiting for a User to Login . . .")
                     conn, addr = s.accept()
                     with conn:
                         print("Connected to {}".format(addr))
