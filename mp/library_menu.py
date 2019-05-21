@@ -33,7 +33,7 @@ class library_menu:
 
             try:
                 if(selection == "1"):
-                    self.searchBook()
+                    self.searchBook(user)
                 elif(selection == "2"):
                     self.borrowBook(user)
                 elif(selection == "3"):
@@ -49,7 +49,7 @@ class library_menu:
 
 
     # Search a book
-    def searchBook(self):
+    def searchBook(self, user):
         """
         There are three methods to search for a book:
         1- Search by book's title
@@ -74,17 +74,19 @@ class library_menu:
             try:
                 if(selection == "1"):
                     title = self.SearchByVoiceOrText("title")
-                    self.listBooksByTitle(title)
+                    title_result=self.listBooksByTitle(title)
                 elif(selection == "2"):
                     author = self.SearchByVoiceOrText("author")
-                    self.listBooksByAuthor(author)
+                    author_result=self.listBooksByAuthor(author)
                 elif(selection == "3"):
                     isbn = self.SearchByVoiceOrText("ISBN")
-                    self.listBooksByISBN(isbn)
+                    isbn_result=self.listBooksByISBN(isbn)
                 elif(selection == "4"):
                     break
                 else:
                     print("Invalid input - please try again.")
+                if title_result==True or isbn_result==True or author_result==True:
+                    self.borrowBook(user)
             except  Exception as e:
                 logging.error("Search menu error: {}".format(str(e)))
 
@@ -253,8 +255,10 @@ class library_menu:
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
+                return True
             else:
                 print("Book not found! please try again.")
+                return False
 
     # list books by author 
     def listBooksByAuthor(self, author):
@@ -273,8 +277,10 @@ class library_menu:
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
+                return True
             else:
                 print("Book not found! please try again.")
+                return False
 
     # list books by ISBN
     def listBooksByISBN(self, isbn):
@@ -294,8 +300,10 @@ class library_menu:
                 for book in books:
                     table.add_row([book[1], book[2], book[3]])
                 print(table)
+                return True
             else:
                 print("Book not found! please try again.")
+                return False
 
 
     ##############Out of scope!!!!#############
