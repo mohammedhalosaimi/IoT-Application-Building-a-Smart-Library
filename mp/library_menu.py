@@ -146,7 +146,6 @@ class library_menu:
         # check if the user typed the ISBN
         regex= r'978[\d\-]+\d'
         pattern = re.match(regex, book_isbn)
-
         if bool(pattern)==True:
             # call the getBookByISBN function to check if the book exists at the library
             book_list = db_object.getBookByISBN(book_isbn)
@@ -158,12 +157,13 @@ class library_menu:
             # if the book exists
             else:
                 # boolean variable to check that the user only borrows one copy of a book at a time
-                bool_borroed = False
+                #bool_borroed = False
                 # loop through all the copies of the same book and check which one is avilable to borrow
                 for i in book_list:
                     # check if the book is avilable to borrow
                     return_value = db_object.getAvilableBook(i[0])
-                    if return_value == True and bool_borroed == False:
+                    #if return_value == True and bool_borroed == False:
+                    if return_value == True:
                         # get book details from the library
                         book_details = db_object.getBookByID(i[0])
                         book_details = list(book_details)
@@ -181,10 +181,12 @@ class library_menu:
                         db_object.insertBookBorrowed(user, book_details[0][0], 'borrowed', today_date)
                         # print success message
                         print("You have successfully borrowed: " + book_details[0][2])
-                        bool_borroed = True
-                    elif return_value == False and i == len(book_list):
-                        # if the book is not avilable, the print a message to the user
-                        print('Sorry but the book is not avilable')
+                        #bool_borroed = True
+                        return True
+                   # elif return_value == False and i == len(book_list)-1:
+                # if the book is not avilable, the print a message to the user
+                print('Sorry but the book is not avilable')
+                return False
         else:
             print("Your Input does not match book's ISBN")
         # Return a book
@@ -248,7 +250,7 @@ class library_menu:
             All books with the title name
         """
         print("--- Books ---")
-        table = PrettyTable(['Title', 'Author', 'ISBN'])
+        table = PrettyTable(['ISBN','Title', 'Author'])
         with DatabaseUtils() as db:
             books =  db.getBookByTitle(title)
             if(len(books) > 0):
@@ -270,7 +272,7 @@ class library_menu:
             All books which have been written by the author
         """
         print("--- Books ---")
-        table = PrettyTable(['Title', 'Author', 'ISBN'])
+        table = PrettyTable(['ISBN','Title', 'Author'])
         with DatabaseUtils() as db:
             books = db.getBookByAuthor(author)
             if(len(books) > 0):
@@ -293,7 +295,7 @@ class library_menu:
         """
 
         print("--- Books ---")
-        table = PrettyTable(['Title', 'Author', 'ISBN'])
+        table = PrettyTable(['ISBN','Title', 'Author'])
         with DatabaseUtils() as db:
             books = db.getBookByISBN(isbn)
             if(len(books) > 0):
@@ -344,7 +346,7 @@ class library_menu:
 # library_menu().insertBook("What the fuck","MARK MANSON","978-1-34-123123-1")
 # library_menu().listBooks()
 
-# a = library_menu()
-# a.runMenu('Mohammed')
+#a = library_menu()
+#a.runMenu('Mohammed')
 
 

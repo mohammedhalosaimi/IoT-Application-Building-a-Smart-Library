@@ -184,7 +184,7 @@ class user:
             # call the recognise file which returns two values, True if face has been recognized, and the user name
             boolean, name = recognise.main()
             # if the face has been recognized, welcome the user to the smaer library
-            if boolean == True:
+            if boolean == True and name != 'Unknown':
                 # send login message to Master Pi
                 print(name, ' welcome to the Smart Library')
                 # create an object from rp_socket
