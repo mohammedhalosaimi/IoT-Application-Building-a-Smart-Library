@@ -248,7 +248,7 @@ class library_menu:
             All books with the title name
         """
         print("--- Books ---")
-        table = PrettyTable(['Title', 'Author', 'ISBN'])
+        table = PrettyTable(['ISBN', 'Title', 'Author'])
         with DatabaseUtils() as db:
             books =  db.getBookByTitle(title)
             if(len(books) > 0):
@@ -270,7 +270,7 @@ class library_menu:
             All books which have been written by the author
         """
         print("--- Books ---")
-        table = PrettyTable(['Title', 'Author', 'ISBN'])
+        table = PrettyTable(['ISBN', 'Title', 'Author'])
         with DatabaseUtils() as db:
             books = db.getBookByAuthor(author)
             if(len(books) > 0):
@@ -293,7 +293,7 @@ class library_menu:
         """
 
         print("--- Books ---")
-        table = PrettyTable(['Title', 'Author', 'ISBN'])
+        table = PrettyTable(['ISBN', 'Title', 'Author'])
         with DatabaseUtils() as db:
             books = db.getBookByISBN(isbn)
             if(len(books) > 0):

@@ -142,6 +142,8 @@ class recognise:
                         # prompt the user if they want to exit
                         user_input = input('Please type q to exit the facial recognition system  ')
                         if user_input == 'q':
+                                cv2.destroyAllWindows()
+                                vs.stop() 
                                 return False, 'None'
 
                         # sleep for 5 seconds
