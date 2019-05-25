@@ -233,12 +233,15 @@ class library_menu:
                 db_object.updateBookBorrowed(user, return_value, 'returned', today_date)
                 # print a message to the user
                 print('We hope that you enjoyed your journey reading the book')
+                return True
             # if the book doesn't exist in the BookBorrowed table, then it means the book has not been borrowed
             else:
                 print('We apologize, the ISBN you entered has not been borrowed by you!')
+                return False
             # if the user typed something else rather than book ISBN
         else:
             print('Your Input does not match books ISBN')
+            return False
 
     # list books by title
     def listBooksByTitle(self, title):
