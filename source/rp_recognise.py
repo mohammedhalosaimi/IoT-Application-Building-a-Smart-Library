@@ -1,16 +1,16 @@
-# USAGE
-# With default parameters
-#     python3 03_recognise.py
-# OR specifying the encodings, screen resolution, output video and display
-#     python3 03_recognise.py -e encodings.pickle -r 240 -o output/capture.avi -y 1
+# # USAGE
+# # With default parameters
+# #     python3 03_recognise.py
+# # OR specifying the encodings, screen resolution, output video and display
+# #     python3 03_recognise.py -e encodings.pickle -r 240 -o output/capture.avi -y 1
 
-## Acknowledgement
-## This code is adapted from:
-## https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
+# ## Acknowledgement
+# ## This code is adapted from:
+# ## https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
 
 
-# references:
-# Programming Internet of Things - Lab week 09
+# # references:
+# # Programming Internet of Things - Lab week 09
 
 # # import the necessary packages
 # from imutils.video import VideoStream
@@ -20,6 +20,8 @@
 # import pickle
 # import time
 # import cv2
+# import time
+
 
 
 # recognise class
@@ -99,15 +101,16 @@ class recognise:
                 #                         for i in matchedIdxs:
                 #                                 name = data["names"][i]
                 #                                 counts[name] = counts.get(name, 0) + 1
-
                 #                         # determine the recognized face with the largest number
                 #                         # of votes (note: in the event of an unlikely tie Python
                 #                         # will select first entry in the dictionary)
                 #                         name = max(counts, key=counts.get)
-
+                                
                 #                 # update the list of names
                 #                 names.append(name)
+                                
 
+                  
                 #         # loop over the recognized faces
                 #         for ((top, right, bottom, left), name) in zip(boxes, names):
                 #                 # rescale the face coordinates
@@ -124,14 +127,25 @@ class recognise:
                 #                 #	0.75, (0, 255, 0), 2)
                                 
                 #                 # print to console, identified person
-                #                 print('Person found: {}'.format(name)) 
-                #                 # Set a flag to sleep the cam for fixed time
-                #                 time.sleep(3.0)
-
+                #                 # print('Person found: {}'.format(name))
+                #                 # do a bit of cleanup
+                #                 cv2.destroyAllWindows()
+                #                 vs.stop() 
                                 
+                #                 # return username and True
                 #                 return True, name
+                                
+                #                 # Set a flag to sleep the cam for fixed time
+                #                 # time.sleep(3.0)
+                                
 
+                #         # prompt the user if they want to exit
+                #         user_input = input('Please type q to exit the facial recognition system  ')
+                #         if user_input == 'q':
+                #                 return False, 'None'
 
+                #         # sleep for 5 seconds
+                #         time.sleep(5)   
 
                 #         # if the video writer is None *AND* we are supposed to write
                 #         # the output video to disk initialize the writer
@@ -150,9 +164,9 @@ class recognise:
                 #                 cv2.imshow("Frame", frame)
                 #                 key = cv2.waitKey(1) & 0xFF
 
-                #         # if the `q` key was pressed, break from the loop
-                #         if key == ord("q"):
-                #                 break
+                #                 # if the `q` key was pressed, break from the loop
+                #                 if key == ord("q"):
+                #                         break
 
                 # # do a bit of cleanup
                 # cv2.destroyAllWindows()
@@ -161,4 +175,6 @@ class recognise:
                 # # check to see if the video writer point needs to be released
                 # if writer is not None:
                 #         writer.release()
+                
+                # return True, name
 

@@ -47,76 +47,85 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="mp_library_menu.library_menu.borrowBook">
+<code class="descname">borrowBook</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.borrowBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>this method allows the user to borrow a book from the library if it is avilabel.</p>
+<p>It also add event to Google calendar with user and book details</p>
+<p>Parameters: username</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="mp_library_menu.library_menu.listBooksByAuthor">
 <code class="descname">listBooksByAuthor</code><span class="sig-paren">(</span><em>author</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.listBooksByAuthor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search books by their author.
-Parameters:</p>
+<dd><p>Search books by their author.</p>
+<p>Parameters:</p>
 <blockquote>
 <div><p>Author of a book</p>
 </div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>All books which have been written by the author</p>
-</dd>
-</dl>
+<p>Returns:</p>
+<blockquote>
+<div><p>All books which have been written by the author</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="mp_library_menu.library_menu.listBooksByISBN">
 <code class="descname">listBooksByISBN</code><span class="sig-paren">(</span><em>isbn</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.listBooksByISBN" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search Books by ISBN. 
-Parameters:</p>
+<dd><p>Search Books by ISBN.</p>
+<p>Parameters:</p>
 <blockquote>
 <div><p>ISBN</p>
 </div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>All books which have the ISBN</p>
-</dd>
-</dl>
+<p>Returns:</p>
+<blockquote>
+<div><p>All books which have the ISBN</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="mp_library_menu.library_menu.listBooksByTitle">
 <code class="descname">listBooksByTitle</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.listBooksByTitle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search books by book name
-Parameters:</p>
+<dd><p>Search books by book name</p>
+<p>Parameters:</p>
 <blockquote>
 <div><p>Book title</p>
 </div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>All books with the title name</p>
-</dd>
-</dl>
+<p>Returns:</p>
+<blockquote>
+<div><p>All books with the title name</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="mp_library_menu.library_menu.returnBook">
 <code class="descname">returnBook</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.returnBook" title="Permalink to this definition">¶</a></dt>
 <dd><p>allow the user to return a book</p>
+<p>Paramters: user</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mp_library_menu.library_menu.runMenu">
 <code class="descname">runMenu</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.runMenu" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method provides users with the search/borrow/return book(s) options
-Parameters:</p>
+<dd><p>This method provides users with the search/borrow/return book(s) options</p>
+<p>Parameters:</p>
 <blockquote>
 <div><p>User name</p>
 </div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>logout message if the user requests</p>
-</dd>
-</dl>
+<p>Returns:</p>
+<blockquote>
+<div><p>logout message if the user requests</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="mp_library_menu.library_menu.searchBook">
-<code class="descname">searchBook</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.searchBook" title="Permalink to this definition">¶</a></dt>
-<dd><p>There are three methods to search for a book:
-1- Search by book’s title
+<code class="descname">searchBook</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.searchBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are three methods to search for a book:</p>
+<p>1- Search by book’s title
 2- Search by book’s author
-3. Search by ISBN
-By selecting any option LMS prompts user to enter title/author/ISBN and retrieves the result in a table
-Parameters:</p>
+3. Search by ISBN</p>
+<p>By selecting any option LMS prompts user to enter title/author/ISBN and retrieves the result in a table</p>
+<p>Parameters:</p>
 <p>Returns:</p>
 </dd></dl>
 
@@ -150,6 +159,12 @@ Parameters:</p>
 <li class="toctree-l1"><a class="reference internal" href="mp_bookevent.html">Master Pi Book Event</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mp_barcodescanner.html">Master Pi Barcode Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mp_voice_recognition.html">Master Pi Voice Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_user.html">Recieption Pi User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_socket.html">Recieption Pi Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_db.html">Recieption Pi Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_encode.html">Recieption Pi Encode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_capture.html">Recieption Pi Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_recognise.html">Recieption Pi Recognise</a></li>
 </ul>
 
 <div class="relations">

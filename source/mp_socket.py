@@ -1,14 +1,7 @@
-#!/usr/bin/env python3
-# Reference: https://realpython.com/python-sockets/
-# Documentation: https://docs.python.org/3/library/socket.html
-"""
-.. module:: mp_socket
-   :synopsis: All endpoints of the Smart Library are defined here
+# #!/usr/bin/env python3
+# # Reference: https://realpython.com/python-sockets/
+# # Documentation: https://docs.python.org/3/library/socket.html
 
-.. moduleauthor:: Farid Farzin
-
-
-"""
 # import socket
 # from library_menu import library_menu
 # import logging
@@ -43,7 +36,7 @@ class mp_socket:
 #                 if(test == "test_setupServer"):
 #                     return True
 #                 while True:
-#                     print("Waiting for Reception Pi...")
+#                     print("The Smart Library is Ready be Accessed! Waiting for a User to Login . . .")
 #                     conn, addr = s.accept()
 #                     with conn:
 #                         print("Connected to {}".format(addr))
@@ -55,7 +48,7 @@ class mp_socket:
 #                             if(data):
 #                                 #Received message from RP   
 #                                 user = data.decode() 
-#                                 print("Message from rp: " + user)
+#                                 # print("Message from rp: " + user)
 #                                 # Call library menu to search books/borrow books/return books
 #                                 logout_req  = library_menu().runMenu(user)
 #                                 if(logout_req == "logout"):
@@ -67,9 +60,9 @@ class mp_socket:
 #         except  Exception as e:
 #             logging.error("MP Socket error: {}".format(str(e)))
 #             print(str(e))
-#         finally:
+#         #finally:
 #             # Clean up the connection
-#             conn.close()
+#          #   conn.close()
 #         return testPassed
 
 # if __name__ == "__main__":
