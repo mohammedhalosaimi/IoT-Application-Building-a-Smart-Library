@@ -24,6 +24,20 @@ class Book(db.Model):
         self.Title = Title
         self.Author = Author
 
+class bookWithStatus():
+    def __init__(self, ISBN, Title, Author, BookID=None):
+        self.BookID = BookID
+        self.ISBN = ISBN
+        self.Title = Title
+        self.Author = Author
+        self.status = "returned"
+    
+    def toJSON(self):
+        return {"BookID": self.BookID,
+                "ISBN": self.ISBN,
+                "Title": self.Title,
+                "Author": self.Author,
+                "Status": self.status}
 
 class BookSchema(ma.Schema):
     # Reference: https://github.com/marshmallow-code/marshmallow/issues/377#issuecomment-261628415
@@ -69,11 +83,11 @@ def addBook():
 # Endpoint to update a book
 @api.route("/book/<id>", methods=["PUT"])
 def personUpdate(id):
+    print("ISBN:" + request.json["ISBN"])
     book = Book.query.get(id)
     ISBN = request.json["ISBN"]
     Title = request.json["Title"]
     Author = request.json["Author"]
-
     book.ISBN = ISBN
     book.Title = Title
     book.Author = Author
@@ -86,7 +100,6 @@ def personUpdate(id):
 @api.route("/book/<id>", methods=["DELETE"])
 def personDelete(id):
     book = Book.query.get(id)
-
     db.session.delete(book)
     db.session.commit()
 

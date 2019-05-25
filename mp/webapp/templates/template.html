@@ -16,8 +16,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/home">Home</a></li>
+      {% if session["logged_in"] %}
       <li><a href="/booklist">List all books</a></li>
-      {% if logged_in %}
       <li><a href="/logout">Log out</a></li>
       {% else %}
       <li><a href="/login">login</a></li>
@@ -26,6 +26,15 @@
   </div>
 </nav>
 {% endblock %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 {% block footer%}
 <footer style="background-color:darkslategrey; color:aliceblue;"></footer>
 {% endblock %}

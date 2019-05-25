@@ -12,10 +12,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Update HOST and PASSWORD appropriately.
 #TODO: Make this load of the confi.json
-HOST = "35.201.19.68"
+HOST = "35.189.54.204"
 USER = "root"
-PASSWORD = "klLBK8BxKmNOfhkE"
-DATABASE = "Library_test"
+PASSWORD = "library123"
+DATABASE = "Smart_Library"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://{}:{}@{}/{}".format(USER, PASSWORD, HOST, DATABASE)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True

@@ -24,7 +24,7 @@ To run the webapp:
 
 Install:
 ```
-pip3 install flask flask_sqlalchemy flask_marshmallow marshmallow-sqlalchemy
+pip3 install flask flask_sqlalchemy flask_marshmallow marshmallow-sqlalchemy timedelta
 ```
 You may also use the Command - "source venv/bin/activate
 ## Running the API
