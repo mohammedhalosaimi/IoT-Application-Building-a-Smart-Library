@@ -1,27 +1,50 @@
 #!/usr/bin/env python3
-import os, requests, json
-from datetime import datetime
-from flask import Flask, render_template, request, redirect, session, url_for
+import os
+from flask import Flask, request, redirect, render_template, session, url_for
 from flask_bootstrap import Bootstrap
-from wtforms import Form, StringField, HiddenField, validators
+from controller import RouteController
 from login_controller import login_controller
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
 app.secret_key = "lFgz7p1PZR6I63He3VvxtCmWdCPf"
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "abc123"
-# The base IP address of the API will be local machine IP at port 5001
-API_IP = "http://"+os.popen('hostname -I').read().rstrip()+":5001/"
+app.add_url_rule('/', 'index', lambda: RouteController.index())
+app.add_url_rule('/booklist', 'booklist', lambda: RouteController.booklist(), methods=['GET', 'POST'])
+app.add_url_rule('/datavis', 'datavis', lambda: RouteController.data_vis())
+app.add_url_rule('/login', 'login', lambda: RouteController.login_post(), methods=['POST', 'GET'])
+app.add_url_rule('/logout', 'logout', lambda: RouteController.logout())
+app.add_url_rule('/delete', 'delete', lambda: RouteController.removeBook(), methods=['POST'])
+app.add_url_rule('/update', 'update', lambda: RouteController.updateBook(), methods=['POST'])
+
+"""
+@app.route('/login', methods=['POST', 'GET'])
+def login_post():
+
+    if request.method == 'POST':
+        if login_controller.validate_login(request):
+            session["logged_in"] = True
+            return redirect(url_for("index"))
+        else:
+            error = "Invalid login information:"
+            return render_template("login.html", error=error)
+    if request.method == 'GET':
+        return render_template('login.html')
+
+"""
+
+if __name__ == "__main__":
+    host = os.popen('hostname -I').read()
+    app.run(host=host, port=80, debug=False)
 
 
-class AddEditBookForm(Form):
-    book_ISBN = StringField('ISBN', [validators.Length(min=1, max=100)])
-    book_title = StringField('Title', [validators.Length(min=1, max=100)])
-    book_author = StringField('Author', [validators.Length(min=1, max=100)])
 
-# main route
+
+
+    
+
+
+"""
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -81,10 +104,17 @@ def login_post():
             session["logged_in"] = True
             return redirect(url_for("index"))
         else:
-            error = "Invalid login information"
+            error = "Invalid login information:"
             return render_template("login.html", error=error)
     if request.method == 'GET':
         return render_template('login.html')
+
+@app.route('/datavis', methods=['GET'])
+def data_vis():
+    if 'logged_in' in session:
+        return render_template("data_vis.html")
+    else:
+        return redirect(url_for("index"))
 
 
 @app.route('/logout', methods=['GET'])
@@ -94,8 +124,6 @@ def logout():
         return redirect('/')
     else:
         return "<h4>You must be logged in to log out<h4>"
+"""
 
 
-if __name__ == "__main__":
-    host = os.popen('hostname -I').read()
-    app.run(host=host, port=80, debug=False)
