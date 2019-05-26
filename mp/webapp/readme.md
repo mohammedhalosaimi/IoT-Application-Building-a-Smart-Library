@@ -8,6 +8,7 @@ pip install flask
 pip install python-dotenv
 pip3 install flask-bootstrap
 pip install flask-session
+pip3 install pytest
 
 ```
 
