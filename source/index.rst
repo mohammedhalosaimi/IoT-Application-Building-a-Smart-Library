@@ -82,6 +82,8 @@ Documentation for the Code
    mp_bookevent
    mp_barcodescanner
    mp_voice_recognition
+   mp_controller
+   mp_login_controller
 
    rp_user
    rp_socket

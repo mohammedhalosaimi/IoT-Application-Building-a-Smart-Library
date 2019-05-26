@@ -9,7 +9,7 @@
 # For use at RMIT
 # API_IP = "http://"+os.popen('hostname -I').read().rstrip()+":5001/"
 # For use at home
-API_IP = "http://127.0.0.1:5001/"
+# API_IP = "http://127.0.0.1:5001/"
 
 class RouteController:
     @staticmethod
@@ -125,8 +125,8 @@ class RouteController:
         # else:
         #     return "<h4>You must be logged in to log out<h4>"
 
-class AddEditBookForm(Form):
-    book_ISBN = StringField('ISBN', [validators.Length(min=1, max=100)])
-    book_title = StringField('Title', [validators.Length(min=1, max=100)])
-    book_author = StringField('Author', [validators.Length(min=1, max=100)])
+# class AddEditBookForm(Form):
+#     book_ISBN = StringField('ISBN', [validators.Length(min=1, max=100)])
+#     book_title = StringField('Title', [validators.Length(min=1, max=100)])
+#     book_author = StringField('Author', [validators.Length(min=1, max=100)])
     

@@ -1,7 +1,7 @@
 # from flask import request
 
-USERNAME = "jaqen"
-PASSWORD = "hgar"
+# USERNAME = "jaqen"
+# PASSWORD = "hgar"
 
 class login_controller:
 
