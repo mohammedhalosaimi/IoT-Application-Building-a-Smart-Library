@@ -140,7 +140,6 @@ class user:
         
         # if user choses 1, it means the user want to login with console-based authentication
         if option == 1:
-        
             # prompt user for username
             username = input('Please type your username ')
             # prompt user for password

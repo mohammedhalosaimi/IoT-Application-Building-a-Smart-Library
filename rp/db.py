@@ -107,6 +107,7 @@ class database:
             # check if the passed password equals the password that is associated with the username in account table
             if(sha256_crypt.verify(password, result[0][0])):
                 return True
+            # if result is empty which means username does exists in the account table, then return false
             else:
                 return False
                 
