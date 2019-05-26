@@ -12,4 +12,7 @@ class TestBorrowReturn(unittest.TestCase):
     def testReturn(self):
         result=self.menu.returnBook(self.user)
         self.assertTrue(result,True)
+        
+if __name__ == "__main__":
+    unittest.main()
 
