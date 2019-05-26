@@ -233,12 +233,15 @@ class library_menu:
                 db_object.updateBookBorrowed(user, return_value, 'returned', today_date)
                 # print a message to the user
                 print('We hope that you enjoyed your journey reading the book')
+                return True
             # if the book doesn't exist in the BookBorrowed table, then it means the book has not been borrowed
             else:
                 print('We apologize, the ISBN you entered has not been borrowed by you!')
+                return False
             # if the user typed something else rather than book ISBN
         else:
             print('Your Input does not match books ISBN')
+            return False
 
     # list books by title
     def listBooksByTitle(self, title):
@@ -308,45 +311,6 @@ class library_menu:
                 return False
 
 
-    ##############Out of scope!!!!#############
-    ###USERS####
-    def listUsers(self):
-        print("--- User ---")
-        print("{:<15} {}".format("User ID", "Name"))
-        with DatabaseUtils() as db:
-            for user in db.getUsers():
-                print("{:<15} {}".format(user[0], user[1]))
-
-    def insertUser(self, name):
-        with DatabaseUtils() as db:
-            if(db.insertUser(name)):
-                # print("{} inserted successfully.".format(name))
-                pass
-            else:
-                print("{} failed to be inserted.".format(name))
-
-    ####BOOKS####
-    def listBooks(self):
-        print("--- Book ---")
-        table = PrettyTable(['ID', 'ISBN','Title', 'Author'])
-        with DatabaseUtils() as db:
-            for book in db.getBooks():
-                table.add_row([book[0],book[1], book[2], book[3]])
-        print(table)
-
-
-    def insertBook(self, title, author, isbn):
-        with DatabaseUtils() as db:
-            if(db.insertBook(title, author, isbn)):
-                print("{} inserted successfully.".format(title))
-            else:
-                print("{} failed to be inserted.".format(title))
-        self.listBooks()
-
-# library_menu().insertBook("What the fuck","MARK MANSON","978-1-34-123123-1")
-# library_menu().listBooks()
-
-#a = library_menu()
-#a.runMenu('Mohammed')
+  
 
 

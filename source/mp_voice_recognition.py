@@ -1,14 +1,14 @@
-# Refernce: Week10 Practical material
-# Reference: https://pypi.org/project/SpeechRecognition/
-# Reference: https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/
-# Note this example requires PyAudio because it uses the Microphone class
+# # Refernce: Week10 Practical material
+# # Reference: https://pypi.org/project/SpeechRecognition/
+# # Reference: https://www.geeksforgeeks.org/speech-recognition-in-python-using-google-speech-api/
+# # Note this example requires PyAudio because it uses the Microphone class
 
-# pip3 install SpeechRecognition
-# sudo apt-get install portaudio19-dev python-all-dev python3-all-dev
-# pip3 install pyaudio
-# pip3 install google-api-python-client
-# sudo apt-get install flac
-# python3 01_microphoneGoogle.py
+# # pip3 install SpeechRecognition
+# # sudo apt-get install portaudio19-dev python-all-dev python3-all-dev
+# # pip3 install pyaudio
+# # pip3 install google-api-python-client
+# # sudo apt-get install flac
+# # python3 01_microphoneGoogle.py
 
 # import speech_recognition as sr
 # import subprocess
@@ -31,6 +31,7 @@ class voice_recognition:
         """
         # # Set the device ID of the mic that we specifically want to use to avoid ambiguity
         # for i, microphone_name in enumerate(sr.Microphone.list_microphone_names()):
+        #     print(microphone_name)
         #     if(microphone_name == MIC_NAME):
         #         device_id = i
         #         break
@@ -49,7 +50,7 @@ class voice_recognition:
         #     try:
         #         audio = r.listen(source, timeout = 1.5)
         #     except sr.WaitTimeoutError:
-        #         return None
+        #         print("Listening timed out whilst waiting for phrase to start")
 
         # # recognize speech using Google Speech Recognition
         # text = None
@@ -57,8 +58,12 @@ class voice_recognition:
         #     # for testing purposes, we're just using the default API key
         #     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
         #     # instead of `r.recognize_google(audio)`
+        #     print("Google Speech Recognition thinks you said '{}'".format(r.recognize_google(audio)))
         #     text = r.recognize_google(audio)
-        # except(sr.UnknownValueError, sr.RequestError):
-        #     pass
+        # except sr.UnknownValueError:
+        #     print("Google Speech Recognition could not understand audio")
+        # except sr.RequestError as e:
+        #     print("Could not request results from Google Speech Recognition service; {0}".format(e))
         # finally:
         #     return text
+

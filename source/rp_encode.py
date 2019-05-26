@@ -1,16 +1,16 @@
-# USAGE
-# With default parameters
-# 		python3 02_encode.py
-# OR specifying the dataset, encodings and detection method
-# 		python3 02_encode.py -i dataset -e encodings.pickle -d cnn
+# # USAGE
+# # With default parameters
+# # 		python3 02_encode.py
+# # OR specifying the dataset, encodings and detection method
+# # 		python3 02_encode.py -i dataset -e encodings.pickle -d cnn
 
-## Acknowledgement
-## This code is adapted from:
-## https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
+# ## Acknowledgement
+# ## This code is adapted from:
+# ## https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
 
 
-# references:
-# Programming Internet of Things - Lab week 09
+# # references:
+# # Programming Internet of Things - Lab week 09
 
 
 # # import the necessary packages

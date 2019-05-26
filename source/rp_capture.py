@@ -1,16 +1,16 @@
-# USAGE
-# With default parameter of user/id
-#       python3 01_capture.py -n default_user
-# OR specifying the dataset and user/id
-#       python3 02_capture.py -i dataset -n default_user
+# # USAGE
+# # With default parameter of user/id
+# #       python3 01_capture.py -n default_user
+# # OR specifying the dataset and user/id
+# #       python3 02_capture.py -i dataset -n default_user
 
-## Acknowledgement
-## This code is adapted from:
-## https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826
+# ## Acknowledgement
+# ## This code is adapted from:
+# ## https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826
 
 
-# references:
-# Programming Internet of Things - Lab week 09
+# # references:
+# # Programming Internet of Things - Lab week 09
 
 # # import the necessary packages
 # # import the necessary packages
