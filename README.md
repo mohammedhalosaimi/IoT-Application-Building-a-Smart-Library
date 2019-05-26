@@ -40,6 +40,9 @@ You will need to run user.py file in one window and library_menu.py in another w
 
 ## Built With
 
+* [Python](https://www.python.org) - programming language
+* [SQLite](https://www.sqlite.org/index.html) - relational database management system
+* [MySQL](https://www.mysql.com) - open-source relational database management system
 * [Flask](http://flask.pocoo.org) - Python microframework
 * [Google Cloud Platform](https://cloud.google.com/gcp/?utm_source=google&utm_medium=cpc&utm_campaign=japac-AU-all-en-dr-bkws-all-super-trial-e-dr-1003987&utm_content=text-ad-none-none-DEV_c-CRE_248263937479-ADGP_Hybrid%20%7C%20AW%20SEM%20%7C%20BKWS%20~%20T1%20%7C%20EXA%20%7C%20General%20%7C%201:1%20%7C%20AU%20%7C%20en%20%7C%20google%20cloud%20platform-KWID_43700023244271242-kwd-296644789888&userloc_9071338&utm_term=KW_google%20cloud%20platform&gclid=CjwKCAjw8qjnBRA-EiwAaNvhwDdJuPzXpsVzy8bM4AsttOQ86iB5Cz29fB-LU5AqkuNp86ayj2igQBoCFsUQAvD_BwE) - Google Cloud Platform
 * [Google Calendar API](https://developers.google.com/calendar/) - Used to add, remove events on a user Google Calendar
@@ -58,5 +61,3 @@ You will need to run user.py file in one window and library_menu.py in another w
 ## Acknowledgments
 
 * Acknowledgments to COSC2674 - Programming Internet of Things code archives
-* Inspiration
-
