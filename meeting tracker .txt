@@ -1,5 +1,42 @@
 Meeting tracking:
 
-1st meeting - Apr 30th, 2018 from 2:30- 3:30 pm
+1st meeting - Apr 30th, 2019 from 2:30- 3:30 pm
 	- Discuss breaking workloads into smaller chunks and log them into Trello.
 	- Discuss the standup meeting that we are going to have in a daily bases (10 minutes long)
+
+
+2nd meeting - May 9th, 2019 from 3:30- 4:30 pm
+	SQL changes:
+
+	Schema Add ISBN to the book table.
+	Remove the Published Date.
+	Remove name (not username) from the SQL.
+	Does Admin for Flask web API need Authentication?
+
+	Brad - Have flask done by 11th or ask for help.
+
+	Google Calandar API working
+<<<<<<< HEAD
+
+	Farid - Work on getting cloud and calendar integrated.
+
+
+3rd meeting - May 18th, 2019 from 3:00- 4:30 pm
+
+	- Discussed the administration login to the web page.
+	- Bard is going to work on the session and directing users to visit login page for adminstration
+	- Farid started working on the voice recognition part
+	- We will have final meeting once all parts are done
+	- Mohammed and Dawei needs to fix camera issue in the recognize file
+=======
+
+	Farid - Work on getting cloud and calendar integrated.
+	
+
+3rd meeting - May 18th, 2019 from 3 - 4:30 pm
+
+	- Brad is alomost done with flask.
+	- Brad will deal with amintration users and sessions
+	- Testing the integrated version of users and library menu
+	- Farid is testing his code for 
+>>>>>>> 8be056b6252dc5210b824b8b69fc6dfa90fb7308

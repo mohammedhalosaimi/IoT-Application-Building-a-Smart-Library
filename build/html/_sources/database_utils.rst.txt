@@ -1,0 +1,6 @@
+Master Pi Database Utils
+========================
+   .. module:: database_utils
+
+   .. autoclass:: DatabaseUtils
+      :members:

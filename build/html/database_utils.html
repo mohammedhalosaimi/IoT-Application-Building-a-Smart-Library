@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Master Pi Database Utils &#8212; Smart Library 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Smart Library’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="master-pi-database-utils">
+<h1>Master Pi Database Utils<a class="headerlink" href="#master-pi-database-utils" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><span class="target" id="module-database_utils"></span><dl class="class">
+<dt id="database_utils.DatabaseUtils">
+<em class="property">class </em><code class="descclassname">database_utils.</code><code class="descname">DatabaseUtils</code><a class="headerlink" href="#database_utils.DatabaseUtils" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="database_utils.DatabaseUtils.createTables">
+<code class="descname">createTables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.createTables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create tables into the databse as per cloud_db_schema.sql file if does not exist.</p>
+<p>Parameters:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.deleteBook">
+<code class="descname">deleteBook</code><span class="sig-paren">(</span><em>bookID</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.deleteBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a book</p>
+<p>Parameters:</p>
+<p>Book ID</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.deleteBookBorrowed">
+<code class="descname">deleteBookBorrowed</code><span class="sig-paren">(</span><em>bookBorrowedID</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.deleteBookBorrowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all borrowed books with the bookBorrowedID.</p>
+<p>Parameters:</p>
+<p>Id of the borrowed book(s)</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.deleteUser">
+<code class="descname">deleteUser</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.deleteUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a user from the cloud</p>
+<p>Parameters:</p>
+<p>LMS user ID</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getAvilableBook">
+<code class="descname">getAvilableBook</code><span class="sig-paren">(</span><em>bookID</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getAvilableBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method checks if the book that is associated with the bookID is avilable to borrow or not</p>
+<p>Parameters:</p>
+<p>BookID</p>
+<p>Returns:</p>
+<p>Either the avilable bookID or a message stating that the book is not avilable to borrow</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getBookBorrowed">
+<code class="descname">getBookBorrowed</code><span class="sig-paren">(</span><em>name</em>, <em>bookID</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getBookBorrowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user’s borrowed book status</p>
+<p>Parameters:</p>
+<p>LMS USER ID, BOOK ID</p>
+<p>Returns:</p>
+<p>user’s borrowed book record</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getBookByAuthor">
+<code class="descname">getBookByAuthor</code><span class="sig-paren">(</span><em>author</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getBookByAuthor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch all the books containing the keyword in the author</p>
+<p>Parameters:</p>
+<p>author of the book or part of the author</p>
+<p>Returns:</p>
+<p>All books contating the keyword</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getBookByISBN">
+<code class="descname">getBookByISBN</code><span class="sig-paren">(</span><em>isbn</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getBookByISBN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch all the books containing the keyword in the isbn</p>
+<p>Parameters:</p>
+<p>isbn of the book or part of the isbn</p>
+<p>Returns:</p>
+<p>All books contating the keyword</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getBookByTitle">
+<code class="descname">getBookByTitle</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getBookByTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch all the books containing the keyword in the title</p>
+<p>Parameters:</p>
+<p>Title of the book or part of the title</p>
+<p>Returns:</p>
+<p>All books contating the keyword</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getBooks">
+<code class="descname">getBooks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getBooks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all the book in the cloud db</p>
+<p>Parameters:</p>
+<p>Returns:</p>
+<p>Returns all the book in the cloud db</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getUser">
+<code class="descname">getUser</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user name from the cloud if already borrowed a book</p>
+<p>Parameters:</p>
+<p>User name</p>
+<p>Returns:</p>
+<p>returns user if borrowed a book in the past</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.getUsers">
+<code class="descname">getUsers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.getUsers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch all users from the cloud</p>
+<p>Parameters:</p>
+<p>Returns:</p>
+<p>List of all users</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.insertBook">
+<code class="descname">insertBook</code><span class="sig-paren">(</span><em>title</em>, <em>author</em>, <em>isbn</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.insertBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a book into the cloud db</p>
+<p>Parameters:</p>
+<p>Book Name, Book author, ISBN</p>
+<p>Returns:</p>
+<p>Confirms if the book is registered</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.insertBookBorrowed">
+<code class="descname">insertBookBorrowed</code><span class="sig-paren">(</span><em>name</em>, <em>bookID</em>, <em>status</em>, <em>borrowdDate</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.insertBookBorrowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocate a book to a user who borrowed the book, mark the book as borrowed and insert the borrowed date.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.insertUser">
+<code class="descname">insertUser</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.insertUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert loggedin user who borrows a book into the google cloud db.</p>
+<p>Parameters:</p>
+<p>User name</p>
+<p>Returns:</p>
+<p>1 if the user is added</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.readConfig">
+<code class="descname">readConfig</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.readConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch configuration data to connect to google cloud database</p>
+<p>Parameters:</p>
+<p>Returns:</p>
+<p>google cloud database parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="database_utils.DatabaseUtils.updateBookBorrowed">
+<code class="descname">updateBookBorrowed</code><span class="sig-paren">(</span><em>name</em>, <em>bookID</em>, <em>status</em>, <em>ReturnedDate</em><span class="sig-paren">)</span><a class="headerlink" href="#database_utils.DatabaseUtils.updateBookBorrowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a book which the user returns to the library, change the status to returned and insert the return date</p>
+<p>Parameters:</p>
+<p>LMS user ID, Book ID, Status=returned,</p>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Smart Library</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Master Pi Database Utils</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Smart Library’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Farid Farzin.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/database_utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

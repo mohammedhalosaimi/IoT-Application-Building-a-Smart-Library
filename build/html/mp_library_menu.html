@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Master Pi Library Menu &#8212; Smart Library 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Master Pi Database Utils" href="mp_database_utils.html" />
+    <link rel="prev" title="Master Pi Socket" href="mp_socket.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="master-pi-library-menu">
+<h1>Master Pi Library Menu<a class="headerlink" href="#master-pi-library-menu" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><span class="target" id="module-mp_library_menu"></span><dl class="class">
+<dt id="mp_library_menu.library_menu">
+<em class="property">class </em><code class="descclassname">mp_library_menu.</code><code class="descname">library_menu</code><a class="headerlink" href="#mp_library_menu.library_menu" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mp_library_menu.library_menu.SearchByVoiceOrText">
+<code class="descname">SearchByVoiceOrText</code><span class="sig-paren">(</span><em>subject</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.SearchByVoiceOrText" title="Permalink to this definition">¶</a></dt>
+<dd><p>We can search a book by typing on the command line or talking to google voice recognition.</p>
+<p>Parameters:</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.borrowBook">
+<code class="descname">borrowBook</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.borrowBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>this method allows the user to borrow a book from the library if it is avilabel.</p>
+<p>It also add event to Google calendar with user and book details</p>
+<p>Parameters: username</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.listBooksByAuthor">
+<code class="descname">listBooksByAuthor</code><span class="sig-paren">(</span><em>author</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.listBooksByAuthor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search books by their author.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>Author of a book</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>All books which have been written by the author</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.listBooksByISBN">
+<code class="descname">listBooksByISBN</code><span class="sig-paren">(</span><em>isbn</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.listBooksByISBN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search Books by ISBN.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>ISBN</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>All books which have the ISBN</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.listBooksByTitle">
+<code class="descname">listBooksByTitle</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.listBooksByTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search books by book name</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>Book title</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>All books with the title name</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.returnBook">
+<code class="descname">returnBook</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.returnBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>allow the user to return a book</p>
+<p>Paramters: user</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.runMenu">
+<code class="descname">runMenu</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.runMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method provides users with the search/borrow/return book(s) options</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>User name</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>logout message if the user requests</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mp_library_menu.library_menu.searchBook">
+<code class="descname">searchBook</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#mp_library_menu.library_menu.searchBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are three methods to search for a book:</p>
+<p>1- Search by book’s title
+2- Search by book’s author
+3. Search by ISBN</p>
+<p>By selecting any option LMS prompts user to enter title/author/ISBN and retrieves the result in a table</p>
+<p>Parameters:</p>
+<p>Returns:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Smart Library</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="mp_socket.html">Master Pi Socket</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Master Pi Library Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_database_utils.html">Master Pi Database Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_bookevent.html">Master Pi Book Event</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_barcodescanner.html">Master Pi Barcode Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_voice_recognition.html">Master Pi Voice Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_user.html">Recieption Pi User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_socket.html">Recieption Pi Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_db.html">Recieption Pi Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_encode.html">Recieption Pi Encode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_capture.html">Recieption Pi Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_recognise.html">Recieption Pi Recognise</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="mp_socket.html" title="previous chapter">Master Pi Socket</a></li>
+      <li>Next: <a href="mp_database_utils.html" title="next chapter">Master Pi Database Utils</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Farid Farzin.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/mp_library_menu.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Smart Library’s documentation! &#8212; Smart Library 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Master Pi Socket" href="mp_socket.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-smart-library-s-documentation">
+<h1>Welcome to Smart Library’s documentation!<a class="headerlink" href="#welcome-to-smart-library-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuration-of-project-environment">
+<h2>Configuration of Project Environment<a class="headerlink" href="#configuration-of-project-environment" title="Permalink to this headline">¶</a></h2>
+<p>This system is provided to the local council library to automate the Library Management
+System (LMS). This system will be used to borrow, return and maintain the backend information.
+The application has two types of users: library user and library admin.
+This system uses Google Calendar API to work with your Raspberry Pi using Google Cloud IoT Platform.</p>
+</div>
+</div>
+<div class="section" id="application-components">
+<h1>Application Components<a class="headerlink" href="#application-components" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Python documentation tools (Sphinx)</p></li>
+<li><p>Unit testing in Python</p></li>
+<li><p>Socket Programming</p></li>
+<li><p>An API using Python’s microframework Flask</p></li>
+<li><p>AI features (facial recognition, object detection and Voice detection)</p></li>
+<li><p>Cloud databases</p></li>
+</ul>
+</div>
+<div class="section" id="overview-on-how-to-run-this-application">
+<h1>Overview on How to Run this Application<a class="headerlink" href="#overview-on-how-to-run-this-application" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li><p>Download the app into two raspberry PIs, one is the master pi and the other is recieption pi</p></li>
+<li><p>Install necessary packages mentioned on top of each class</p></li>
+</ol>
+</div>
+<div class="section" id="setup-procedure">
+<h1>Setup procedure<a class="headerlink" href="#setup-procedure" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic">
+<li><dl>
+<dt>Master Pi</dt><dd><dl>
+<dt>On the MP Command line go to MP folder</dt><dd><ul>
+<li><p>Type the command below on the command line environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">mp_socket</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Recieption Pi</dt><dd><dl>
+<dt>On the RP Command line go to RP folder</dt><dd><ul>
+<li><p>Type the command below on the command line environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">user</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="lms-features">
+<h1>LMS features<a class="headerlink" href="#lms-features" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ol class="upperalpha">
+<li><dl>
+<dt>For library users:</dt><dd><p>The library user arrives at the reception. It is not manned by any person. The
+RECEPTION PI (RP) provides two options available for logging into the system:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>using console-based system which allows them to type in the user credentials or,</p></li>
+<li><p>using a facial recognition system</p></li>
+</ul>
+</div></blockquote>
+<p>The user registration is required for the first-time user. Upon registration the details are stored in a
+local database installed on RP.
+Upon logging in, a success message along with the username is sent from RP to the MASTER PI
+(MP) via sockets.
+The user is now presented with another console-based application:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>search for book catalogues based on ISBN/Author name/Book name</p></li>
+<li><p>option for borrowing a book/books</p></li>
+<li><p>option for returning a book/books</p></li>
+<li><p>logout</p></li>
+</ul>
+</div></blockquote>
+<p>Upon logging out a message is sent via sockets from MP to RP.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>For library admin:</dt><dd><p>This is a separate website application that runs on MP. It can only be accessed
+by admin personnel.
+Admin website makes use of an API to</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Add books to catalogue</p></li>
+<li><p>Remove books and</p></li>
+<li><p>Generate a data visualisation report for books borrowed (day wise).</p></li>
+</ul>
+</div></blockquote>
+<p>The book database is stored on a cloud environment namely the Google’s GCP IoT platform
+(Google Cloud Platform).</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<div class="section" id="documentation-for-the-code">
+<h2>Documentation for the Code<a class="headerlink" href="#documentation-for-the-code" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mp_socket.html">Master Pi Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_library_menu.html">Master Pi Library Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_database_utils.html">Master Pi Database Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_bookevent.html">Master Pi Book Event</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_barcodescanner.html">Master Pi Barcode Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_voice_recognition.html">Master Pi Voice Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_user.html">Recieption Pi User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_socket.html">Recieption Pi Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_db.html">Recieption Pi Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_encode.html">Recieption Pi Encode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_capture.html">Recieption Pi Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_recognise.html">Recieption Pi Recognise</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Smart Library</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mp_socket.html">Master Pi Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_library_menu.html">Master Pi Library Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_database_utils.html">Master Pi Database Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_bookevent.html">Master Pi Book Event</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_barcodescanner.html">Master Pi Barcode Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_voice_recognition.html">Master Pi Voice Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_user.html">Recieption Pi User</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_socket.html">Recieption Pi Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_db.html">Recieption Pi Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_encode.html">Recieption Pi Encode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_capture.html">Recieption Pi Capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_recognise.html">Recieption Pi Recognise</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="mp_socket.html" title="next chapter">Master Pi Socket</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Farid Farzin.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

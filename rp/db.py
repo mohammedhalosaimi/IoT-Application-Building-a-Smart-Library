@@ -21,28 +21,29 @@ class database:
         """
         # connect to the database
         conn = sqlite3.connect(dbname)
+        database.create_tables(conn)
         # return connection
         return conn
 
     # create tables method
     @staticmethod
-    def create_tables():
+    def create_tables(conn):
         """
         This method creates two tables. user and account table
         """
         # call the connection method which returns the connection object
-        conn = database.connection()
+        # conn = database.connection()
         with conn:
             # move the cursor to the top
             cur = conn.cursor()
             # drop table account if exists
-            cur.execute("DROP TABLE IF EXISTS account")
+            # cur.execute("DROP TABLE IF EXISTS account")
             # create a table named account with the variables: username, and password
-            cur.execute("CREATE TABLE account(username TEXT NOT NULL PRIMARY KEY,password TEXT)")
+            cur.execute("CREATE TABLE  IF NOT EXISTS account(username TEXT NOT NULL PRIMARY KEY,password TEXT)")
             # drop table user if exists
-            cur.execute("DROP TABLE IF EXISTS user")
+            # cur.execute("DROP TABLE IF EXISTS user")
             # create a table named user with the variables: firstname, lastname, username, and email
-            cur.execute("CREATE TABLE user(firstname TEXT,lastname TEXT,username TEXT, email TEXT,FOREIGN KEY (username) REFERENCES ACCOUNT(username))")
+            cur.execute("CREATE TABLE IF NOT EXISTS user(firstname TEXT,lastname TEXT,username TEXT, email TEXT,FOREIGN KEY (username) REFERENCES ACCOUNT(username))")
 
     # insert data method  
     @staticmethod
@@ -102,12 +103,22 @@ class database:
             # move the cursor to the top
             cur = conn.cursor()
             # assign the output of the sql code to a result variable after converting the sql object into a python list
-            result = list(cur.execute("SELECT * FROM account WHERE USERNAME = ?",(username,)))
+            result = list(cur.execute("SELECT password FROM account WHERE USERNAME = ?",(username,)))
             # check if the passed password equals the password that is associated with the username in account table
-            if password != result[-1][-1] :
+            if(sha256_crypt.verify(password, result[0][0])):
                 return True
-            # else return False
-            else: return False
+            # if result is empty which means username does exists in the account table, then return false
+            else:
+                return False
+                
+
+            # if password == result[0][0]:
+            #     print('True')
+            #     return True
+            # # else return False
+            # else: 
+            #     print('False')
+            #     return False
 
     # check username exists method
     @staticmethod
@@ -126,15 +137,18 @@ class database:
 
         """
         # call the connection method which returns the connection object
-        conn=database.connection()
-        with conn:
-            # move the cursor to the top 
-            cur=conn.cursor()
-            # assign the output of the sql code to a result variable after converting the sql object into a python list
-            result = list(cur.execute("SELECT * FROM account WHERE USERNAME = ?",(username,)))
-            # if result is empty which means username does not exist, then return true
-            if not result:
-                return True
-            # if result is empty which means username does exists in the account table, then return false
-            else:
-                return False
+        try:
+            conn=database.connection()
+            with conn:
+                # move the cursor to the top 
+                cur=conn.cursor()
+                # assign the output of the sql code to a result variable after converting the sql object into a python list
+                result = list(cur.execute("SELECT * FROM account WHERE USERNAME = ?",(username,)))
+                # if result is empty which means username does not exist, then return true
+                if not result:
+                    return True
+                # if result is empty which means username does exists in the account table, then return false
+                else:
+                    return False
+        except  Exception as e:
+            print("Error: " + str(e))
