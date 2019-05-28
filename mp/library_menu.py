@@ -47,7 +47,14 @@ class library_menu:
                 logging.error("Library menu error: {}".format(str(e)))
         return "login"
 
-
+    def insertUser(self, name):
+        with DatabaseUtils() as db:
+            if(db.insertUser(name)):
+                # print("{} inserted successfully.".format(name))
+                pass
+            else:
+                print("{} failed to be inserted.".format(name))
+                
     # Search a book
     def searchBook(self, user):
         """
