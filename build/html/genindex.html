@@ -54,9 +54,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mp_barcodescanner.html#mp_barcodescanner.barcodescanner">barcodescanner (class in mp_barcodescanner)</a>
 </li>
+      <li><a href="mp_bookevent.html#mp_bookevent.bookevent">bookevent (class in mp_bookevent)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="mp_bookevent.html#mp_bookevent.bookevent">bookevent (class in mp_bookevent)</a>
+      <li><a href="mp_controller.html#mp_controller.RouteController.booklist">booklist() (mp_controller.RouteController static method)</a>
+</li>
+      <li><a href="mp_library_menu.html#mp_library_menu.library_menu.borrowBook">borrowBook() (mp_library_menu.library_menu method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -66,12 +70,16 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rp_capture.html#rp_capture.capture">capture (class in rp_capture)</a>
 </li>
+      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.checkIfBookExistsInBookBorrowed">checkIfBookExistsInBookBorrowed() (mp_database_utils.DatabaseUtils method)</a>
+</li>
       <li><a href="rp_db.html#rp_db.database.checkusernameexists">checkusernameexists() (rp_db.database static method)</a>
 </li>
       <li><a href="mp_socket.html#mp_socket.mp_socket.connection">connection() (mp_socket.mp_socket method)</a>
 
       <ul>
         <li><a href="rp_db.html#rp_db.database.connection">(rp_db.database static method)</a>
+</li>
+        <li><a href="rp_socket.html#rp_socket.rp_socket.connection">(rp_socket.rp_socket method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -86,6 +94,8 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mp_controller.html#mp_controller.RouteController.data_vis">data_vis() (mp_controller.RouteController static method)</a>
+</li>
       <li><a href="rp_db.html#rp_db.database">database (class in rp_db)</a>
 </li>
       <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils">DatabaseUtils (class in mp_database_utils)</a>
@@ -118,6 +128,8 @@
 </li>
       <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.getBookByAuthor">getBookByAuthor() (mp_database_utils.DatabaseUtils method)</a>
 </li>
+      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.getBookByID">getBookByID() (mp_database_utils.DatabaseUtils method)</a>
+</li>
       <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.getBookByISBN">getBookByISBN() (mp_database_utils.DatabaseUtils method)</a>
 </li>
   </ul></td>
@@ -138,12 +150,16 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.insertBook">insertBook() (mp_database_utils.DatabaseUtils method)</a>
+      <li><a href="mp_controller.html#mp_controller.RouteController.index">index() (mp_controller.RouteController static method)</a>
 </li>
-      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.insertBookBorrowed">insertBookBorrowed() (mp_database_utils.DatabaseUtils method)</a>
+      <li><a href="mp_bookevent.html#mp_bookevent.bookevent.insert">insert() (mp_bookevent.bookevent static method)</a>
+</li>
+      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.insertBook">insertBook() (mp_database_utils.DatabaseUtils method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.insertBookBorrowed">insertBookBorrowed() (mp_database_utils.DatabaseUtils method)</a>
+</li>
       <li><a href="rp_db.html#rp_db.database.insertData">insertData() (rp_db.database static method)</a>
 </li>
       <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.insertUser">insertUser() (mp_database_utils.DatabaseUtils method)</a>
@@ -158,13 +174,19 @@
 </li>
       <li><a href="mp_library_menu.html#mp_library_menu.library_menu.listBooksByAuthor">listBooksByAuthor() (mp_library_menu.library_menu method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mp_library_menu.html#mp_library_menu.library_menu.listBooksByISBN">listBooksByISBN() (mp_library_menu.library_menu method)</a>
 </li>
       <li><a href="mp_library_menu.html#mp_library_menu.library_menu.listBooksByTitle">listBooksByTitle() (mp_library_menu.library_menu method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rp_user.html#rp_user.user.login">login() (rp_user.user static method)</a>
+</li>
+      <li><a href="mp_login_controller.html#mp_login_controller.login_controller">login_controller (class in mp_login_controller)</a>
+</li>
+      <li><a href="mp_controller.html#mp_controller.RouteController.login_post">login_post() (mp_controller.RouteController static method)</a>
+</li>
+      <li><a href="mp_controller.html#mp_controller.RouteController.logout">logout() (mp_controller.RouteController static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -184,13 +206,17 @@
 </li>
       <li><a href="mp_barcodescanner.html#module-mp_barcodescanner">mp_barcodescanner (module)</a>
 </li>
+      <li><a href="mp_bookevent.html#module-mp_bookevent">mp_bookevent (module)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="mp_bookevent.html#module-mp_bookevent">mp_bookevent (module)</a>
+      <li><a href="mp_controller.html#module-mp_controller">mp_controller (module)</a>
 </li>
       <li><a href="mp_database_utils.html#module-mp_database_utils">mp_database_utils (module)</a>
 </li>
       <li><a href="mp_library_menu.html#module-mp_library_menu">mp_library_menu (module)</a>
+</li>
+      <li><a href="mp_login_controller.html#module-mp_login_controller">mp_login_controller (module)</a>
 </li>
       <li><a href="mp_socket.html#mp_socket.mp_socket">mp_socket (class in mp_socket)</a>
 
@@ -212,14 +238,20 @@
 </li>
       <li><a href="rp_user.html#rp_user.user.registration">registration() (rp_user.user static method)</a>
 </li>
+      <li><a href="mp_controller.html#mp_controller.RouteController.removeBook">removeBook() (mp_controller.RouteController static method)</a>
+</li>
+      <li><a href="mp_bookevent.html#mp_bookevent.bookevent.removeEvent">removeEvent() (mp_bookevent.bookevent static method)</a>
+</li>
       <li><a href="mp_library_menu.html#mp_library_menu.library_menu.returnBook">returnBook() (mp_library_menu.library_menu method)</a>
 </li>
+      <li><a href="mp_controller.html#mp_controller.RouteController">RouteController (class in mp_controller)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rp_capture.html#module-rp_capture">rp_capture (module)</a>
 </li>
       <li><a href="rp_db.html#module-rp_db">rp_db (module)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="rp_encode.html#module-rp_encode">rp_encode (module)</a>
 </li>
       <li><a href="rp_recognise.html#module-rp_recognise">rp_recognise (module)</a>
@@ -254,10 +286,12 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.updateBookBorrowed">updateBookBorrowed() (mp_database_utils.DatabaseUtils method)</a>
+      <li><a href="mp_controller.html#mp_controller.RouteController.updateBook">updateBook() (mp_controller.RouteController static method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mp_database_utils.html#mp_database_utils.DatabaseUtils.updateBookBorrowed">updateBookBorrowed() (mp_database_utils.DatabaseUtils method)</a>
+</li>
       <li><a href="rp_user.html#rp_user.user">user (class in rp_user)</a>
 </li>
   </ul></td>
@@ -266,10 +300,12 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="rp_db.html#rp_db.database.veriftPassword">veriftPassword() (rp_db.database static method)</a>
+      <li><a href="mp_login_controller.html#mp_login_controller.login_controller.validate_login">validate_login() (mp_login_controller.login_controller static method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="rp_db.html#rp_db.database.veriftPassword">veriftPassword() (rp_db.database static method)</a>
+</li>
       <li><a href="mp_voice_recognition.html#mp_voice_recognition.voice_recognition">voice_recognition (class in mp_voice_recognition)</a>
 </li>
   </ul></td>
@@ -301,6 +337,8 @@
 <li class="toctree-l1"><a class="reference internal" href="mp_bookevent.html">Master Pi Book Event</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mp_barcodescanner.html">Master Pi Barcode Scanner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mp_voice_recognition.html">Master Pi Voice Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_controller.html">Master Pi Web App Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp_login_controller.html">Master Pi Web App Login Controller</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rp_user.html">Recieption Pi User</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rp_socket.html">Recieption Pi Socket</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rp_db.html">Recieption Pi Database</a></li>

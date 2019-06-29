@@ -1,0 +1,46 @@
+{% extends 'template.html' %}
+
+
+{% block navbar %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<h4>Add Book</h4>
+<form method=post>
+  <dl>
+    {{ render_field(addBookForm.book_ISBN) }}
+    {{ render_field(addBookForm.book_title) }}
+    {{ render_field(addBookForm.book_author) }}
+  </dl>
+  <p><input class="btn btn-success" type=submit value="Add Book">
+</form>
+{% for book in books %}
+<li style="background: lightgray; padding: 1em"> 
+  <h4>{{book["Title"]}}</h4>
+  <h6>By: {{book["Author"]}}</h6>
+<form method="POST" action=./update style="background: darkslategray; color: aliceblue; padding: 1em">
+  <h5>Enter updated details:</h5>
+  <dl>
+      <input type="hidden" value = "{{book["BookID"]}}" name="id" id="id"> 
+      {{ render_field(addBookForm.book_ISBN) }}
+      {{ render_field(addBookForm.book_title) }}
+      {{ render_field(addBookForm.book_author) }}
+  </dl>
+<p><input class="btn btn-info" type=submit value="Update Book">
+</form>
+<form method="POST" action=./delete>
+  <dl>
+      <input type="hidden" value = "{{book["BookID"]}}" name="id" id="id">   
+  </dl>
+<p><input class="btn btn-danger" type=submit value="Delete Book">
+</form>
+</li>
+<br />
+{% endfor %}
+</ul>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{% endblock %}

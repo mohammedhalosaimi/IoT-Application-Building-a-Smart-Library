@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+
+
+{% block navbar %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<div class ="container-fluid">
+  <h1>Library Managment System Administration</h1> 
+  <div class="row">
+    <div class="span4">
+      <h2>LMS Book Management</h1>
+    </div>
+    <div class="span4">
+      <h3>Using the LMS admin</h3>
+      <p>
+        In the above navigation, select "List Books". This will list all books in the system.
+        You can:
+        <ul>
+          <li>Add a book</li>
+          <li>Delete a book</li>
+          <li>Edit a book</li>
+        </ul>
+      </p>
+    </div>
+    <div class="span4">
+      <h3>Support</h3>
+      <h4>For support please contact</h4>
+      <p><a href="mailto:s3494239@student.rmit.edu.au"> support@awesomeLMS.rmit.au</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
